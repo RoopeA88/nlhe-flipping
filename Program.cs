@@ -70,7 +70,45 @@ void sekoita(){
     kortit_listana = new List<string>(kortit);
 }
 
-void onko_suora(string kortit, string floppi, string turn, string river){
-    
-
+int kortti_luvuksi(string kortti){
+    char pilkotaan_kortti = kortti[0];
+    int kortti_numerona;
+    if (pilkotaan_kortti == 'A'){
+        kortti_numerona = 14;
+    }
+    else if (pilkotaan_kortti == 'K'){
+        kortti_numerona = 13;       
+    } else if(pilkotaan_kortti == 'Q'){
+        kortti_numerona = 12;
+    } else if(pilkotaan_kortti == 'J'){
+        kortti_numerona = 11;
+    } else if(pilkotaan_kortti == 'T'){
+        kortti_numerona = 10;
+    } else{
+        kortti_numerona = (int)char.GetNumericValue(pilkotaan_kortti);
+    }
+    return kortti_numerona;
 }
+
+int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int floppi2, int floppi3, int turn, int river){
+    int suoran_laskuri = 0;
+    List<int> kuinka_suuri_suora = new List<int>();
+    int [] jarjesta_kortit = new int[]{pelaajan_kortti1,pelaajan_kortti2,floppi1,floppi2,floppi3,turn,river};
+    jarjesta_kortit = jarjesta_kortit.Distinct().ToArray();
+    Array.Sort(jarjesta_kortit);
+    for(int i = jarjesta_kortit.Length-1; i > 0; i--){
+        if(jarjesta_kortit[i-1] == jarjesta_kortit[i]-1){
+            suoran_laskuri++;
+            kuinka_suuri_suora.Add(jarjesta_kortit[i]);
+        } else{
+            suoran_laskuri = 0;
+            kuinka_suuri_suora.Clear();
+        }
+        if(suoran_laskuri == 4){
+            return kuinka_suuri_suora.Max();
+        }
+            
+        }
+        return 0;
+    }
+
