@@ -15,25 +15,42 @@ string pelaajan_kortti1;
 string pelaajan_kortti2;
 
 string jaaFloppi(){
-    int random_luku1 = random.Next(1,51);
+    int random_luku1 = random.Next(0,48);
     string flopin_eka_kortti = kortit_listana[random_luku1];
     kortit_listana.RemoveAt(random_luku1);
-    int random_luku2 = random.Next(1,50);
+    int random_luku2 = random.Next(0,47);
     string flopin_toinen_kortti = kortit_listana[random_luku2];
     kortit_listana.RemoveAt(random_luku2);
-    int random_luku3 = random.Next(1,49);
+    int random_luku3 = random.Next(0,46);
     string flopin_kolmas_kortti = kortit_listana[random_luku3];
+    string palautettava = flopin_eka_kortti + flopin_toinen_kortti + flopin_kolmas_kortti;
+    return palautettava;
 }
 
 
 
 string jaa_pelaajan_kortit(){
-    int random_luku1 = random.Next(1,53);
+    int random_luku1 = random.Next(0,52);
     pelaajan_kortti1 = kortit_listana[random_luku1];
     kortit_listana.RemoveAt(random_luku1);
-    int random_luku2 = random.Next(1,52);
+    int random_luku2 = random.Next(0,51);
     pelaajan_kortti2 = kortit_listana[random_luku2];
     kortit_listana.RemoveAt(random_luku2);
     string palautettava = pelaajan_kortti1 + pelaajan_kortti2;
     return palautettava;
+}
+
+string jaa_vastustajan_kortit(){
+    int random_luku1 = random.Next(0,50);
+    string vastustajan_kortti1 = kortit_listana[random_luku1];
+    kortit_listana.RemoveAt(random_luku1);
+    int random_luku2 = random.Next(0,49);
+    string vastustajan_kortti2 = kortit_listana[random_luku2];
+    kortit_listana.RemoveAt(random_luku2);
+    string palautettava = vastustajan_kortti1+vastustajan_kortti2;
+    return palautettava;
+}
+
+void sekoita(){
+    kortit_listana = new List<string>(kortit);
 }
