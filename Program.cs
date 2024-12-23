@@ -14,7 +14,7 @@ List<string> kortit_listana = new List<string>(kortit);
 string pelaajan_kortti1;
 string pelaajan_kortti2;
 
-string jaaFloppi(){
+string jaa_floppi(){
     int random_luku1 = random.Next(0,48);
     string flopin_eka_kortti = kortit_listana[random_luku1];
     kortit_listana.RemoveAt(random_luku1);
@@ -26,6 +26,21 @@ string jaaFloppi(){
     string palautettava = flopin_eka_kortti + flopin_toinen_kortti + flopin_kolmas_kortti;
     return palautettava;
 }
+
+string jaa_turni(){
+    int random_luku1 = random.Next(0,45);
+    string turni = kortit_listana[random_luku1];
+    kortit_listana.RemoveAt(random_luku1);
+    return turni;
+}
+
+string jaa_riveri(){
+    int random_luku1 = random.Next(0,44);
+    string riveri = kortit_listana[random_luku1];
+    kortit_listana.RemoveAt(random_luku1);
+    return riveri;
+}
+
 
 
 
@@ -53,4 +68,9 @@ string jaa_vastustajan_kortit(){
 
 void sekoita(){
     kortit_listana = new List<string>(kortit);
+}
+
+void onko_suora(string kortit, string floppi, string turn, string river){
+    
+
 }
