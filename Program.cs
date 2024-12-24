@@ -89,7 +89,51 @@ int kortti_luvuksi(string kortti){
     }
     return kortti_numerona;
 }
-
+int onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+    int diamond = 0;
+    int club = 0;
+    int spade = 0;
+    int heart = 0;
+    int isoin_d = 2;
+    int isoin_c = 2;
+    int isoin_s = 2;
+    int isoin_h = 2;
+    string [] lista = new string[]{pelaajan_kortti1, pelaajan_kortti2, floppi1,floppi2,floppi3,turn,river};
+    foreach(string kortti in lista){
+        if(kortti[1] == 'd'){
+            diamond++;
+            if(kortti_luvuksi(kortti) > isoin_d){
+                isoin_d = kortti_luvuksi(kortti);
+            }
+        }else if(kortti[1] == 'h'){
+            heart++;
+            if(kortti_luvuksi(kortti) > isoin_h){
+                isoin_h = kortti_luvuksi(kortti);
+            }
+        } else if(kortti[1] == 's'){
+            spade++;
+            if(kortti_luvuksi(kortti) > isoin_s){
+                isoin_s = kortti_luvuksi(kortti);
+            }
+        } else if(kortti[1] == 'c'){
+            club++;
+            if(kortti_luvuksi(kortti) > isoin_c){
+                isoin_c = kortti_luvuksi(kortti);
+            }
+        }
+    }
+    if(diamond >4){
+        return isoin_d;
+    } else if(heart > 4){
+        return isoin_h;
+    } else if(spade > 4){
+        return isoin_s;
+    } else if(club > 4){
+        return isoin_c;
+    } else{
+        return 0;
+    }
+}
 int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int floppi2, int floppi3, int turn, int river){
     int suoran_laskuri = 0;
     List<int> kuinka_suuri_suora = new List<int>();
