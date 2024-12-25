@@ -156,3 +156,29 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
         return 0;
     }
 
+    int onko_pari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        List<string> korttiArray = new List<string> {pelaajan_kortti1, pelaajan_kortti2, floppi1, floppi2, floppi3, turn, river};
+        int indeksi = 0;
+        int onko_pari = 0;
+        int kortin_arvo = 0;
+        
+        
+        while(indeksi <korttiArray.Count){
+            foreach(string kortti in korttiArray){
+                if(korttiArray[indeksi][0] == kortti[0] && korttiArray[indeksi] != kortti){
+                    onko_pari++;
+                    
+                    kortin_arvo = (int)char.GetNumericValue(kortti[0]);
+                    return kortin_arvo;
+                    
+                }
+            }
+            indeksi++;
+        }
+        return 0;
+        
+    }
+
+    int testi = onko_pari("Ah","Jh","7d","6c","2h","Kc","7c");
+    Console.WriteLine(testi);
+    
