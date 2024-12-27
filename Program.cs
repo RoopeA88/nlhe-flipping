@@ -161,24 +161,66 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
         int indeksi = 0;
         int onko_pari = 0;
         int kortin_arvo = 0;
+        List<string> parit_listassa = new List<string>{};
         
         
         while(indeksi <korttiArray.Count){
             foreach(string kortti in korttiArray){
                 if(korttiArray[indeksi][0] == kortti[0] && korttiArray[indeksi] != kortti){
                     onko_pari++;
+                    parit_listassa.Add(kortti);
+                    kortin_arvo = kortti_luvuksi(kortti);
                     
-                    kortin_arvo = (int)char.GetNumericValue(kortti[0]);
-                    return kortin_arvo;
                     
                 }
             }
             indeksi++;
         }
+        if(onko_pari == 2){
+            Console.WriteLine($"Pelaajalla on yksi pari {parit_listassa[0]} {parit_listassa[1]}");
+            return kortin_arvo;
+        } else{
         return 0;
+        }
         
     }
 
-    int testi = onko_pari("Ah","Jh","7d","6c","2h","Kc","7c");
+    List<string> onko_kaksi_paria(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        List<string> korttiArray = new List<string> {pelaajan_kortti1, pelaajan_kortti2, floppi1, floppi2, floppi3, turn, river};
+        List<int> parit = new List<int>{};
+        List<string> parit_kortteina = new List<string>{};
+        int indeksi = 0;
+        int onko_pari = 0;
+        int kortin_arvo = 0;
+        
+        
+        while(indeksi <korttiArray.Count){
+            foreach(string kortti in korttiArray){
+                if(korttiArray[indeksi][0] == kortti[0] && korttiArray[indeksi] != kortti){
+                    onko_pari++;
+                    parit_kortteina.Add(kortti);
+                    kortin_arvo = kortti_luvuksi(kortti);
+                    parit.Add(kortin_arvo);
+                    
+                    
+                    
+                }
+            }
+            indeksi++;
+        }
+        if(onko_pari == 4){
+            parit.Sort();
+            parit_kortteina.Sort();
+            Console.WriteLine($"Pelaajalla on kaksi paria, {parit_kortteina[0]} {parit_kortteina[1]} ja {parit_kortteina[2]} {parit_kortteina[3]}");
+            return parit_kortteina;
+        } else{
+        return null;
+        }
+        
+    }
+
+    int testi = onko_pari("Ah","Jh","7d","6c","2h","Kc","Ac");
     Console.WriteLine(testi);
+    List<string> testi2 = onko_kaksi_paria("Kh", "Qc","Qh", "6c", "2h","3d", "3h");
+    Console.WriteLine(testi2[0]);
     
