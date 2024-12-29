@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("nlhe-flipping")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+41a55edb29adaae7933d84fb57677964052a28ce")]
 [assembly: System.Reflection.AssemblyProductAttribute("nlhe-flipping")]
 [assembly: System.Reflection.AssemblyTitleAttribute("nlhe-flipping")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

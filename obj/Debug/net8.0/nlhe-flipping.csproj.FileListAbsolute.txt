@@ -1,0 +1,15 @@
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\bin\Debug\net8.0\nlhe-flipping.exe
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\bin\Debug\net8.0\nlhe-flipping.deps.json
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\bin\Debug\net8.0\nlhe-flipping.runtimeconfig.json
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\bin\Debug\net8.0\nlhe-flipping.dll
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\bin\Debug\net8.0\nlhe-flipping.pdb
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\obj\Debug\net8.0\nlhe-flipping.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\obj\Debug\net8.0\nlhe-flipping.AssemblyInfoInputs.cache
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\obj\Debug\net8.0\nlhe-flipping.AssemblyInfo.cs
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\obj\Debug\net8.0\nlhe-flipping.csproj.CoreCompileInputs.cache
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\obj\Debug\net8.0\nlhe-flipping.sourcelink.json
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\obj\Debug\net8.0\nlhe-flipping.dll
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\obj\Debug\net8.0\refint\nlhe-flipping.dll
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\obj\Debug\net8.0\nlhe-flipping.pdb
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\obj\Debug\net8.0\nlhe-flipping.genruntimeconfig.cache
+C:\Users\roope\OneDrive\Työpöytä\ohjelmointiprojektit\nlhe_flipping_c#\nlhe-flipping\obj\Debug\net8.0\ref\nlhe-flipping.dll
