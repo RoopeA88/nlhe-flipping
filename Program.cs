@@ -13,6 +13,8 @@ List<string> kortit_listana = new List<string>(kortit);
 
 string pelaajan_kortti1;
 string pelaajan_kortti2;
+List<int> kickeri = new List<int>{};
+List<int> tasapeli = new List<int>{0};
 
 string jaa_floppi(){
     int random_luku1 = random.Next(0,48);
@@ -123,12 +125,56 @@ int onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, 
         }
     }
     if(diamond >4){
+        if(isoin_d == 14){
+            Console.WriteLine("väri: ässä hai");
+        } else if(isoin_d == 13){
+            Console.WriteLine("väri: kuningas hai");
+        } else if(isoin_d == 12){
+            Console.WriteLine("väri: rouva hai");
+        } else if(isoin_d == 11){
+            Console.WriteLine("väri: jätkä hai");
+        } else{
+            Console.WriteLine($"väri {isoin_d} hai");
+        }
         return isoin_d;
     } else if(heart > 4){
+          if(isoin_h == 14){
+            Console.WriteLine("väri: ässä hai");
+        } else if(isoin_h == 13){
+            Console.WriteLine("väri: kuningas hai");
+        } else if(isoin_h == 12){
+            Console.WriteLine("väri: rouva hai");
+        } else if(isoin_h == 11){
+            Console.WriteLine("väri: jätkä hai");
+        } else{
+            Console.WriteLine($"väri {isoin_h} hai");
+        }
         return isoin_h;
     } else if(spade > 4){
+          if(isoin_s == 14){
+            Console.WriteLine("väri: ässä hai");
+        } else if(isoin_s == 13){
+            Console.WriteLine("väri: kuningas hai");
+        } else if(isoin_s == 12){
+            Console.WriteLine("väri: rouva hai");
+        } else if(isoin_s == 11){
+            Console.WriteLine("väri: jätkä hai");
+        } else{
+            Console.WriteLine($"väri {isoin_s} hai");
+        }
         return isoin_s;
     } else if(club > 4){
+          if(isoin_c == 14){
+            Console.WriteLine("väri: ässä hai");
+        } else if(isoin_c == 13){
+            Console.WriteLine("väri: kuningas hai");
+        } else if(isoin_c == 12){
+            Console.WriteLine("väri: rouva hai");
+        } else if(isoin_c == 11){
+            Console.WriteLine("väri: jätkä hai");
+        } else{
+            Console.WriteLine($"väri {isoin_c} hai");
+        }
         return isoin_c;
     } else{
         return 0;
@@ -136,20 +182,38 @@ int onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, 
 }
 int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int floppi2, int floppi3, int turn, int river){
     int suoran_laskuri = 0;
+    List<int> lista_assan_toimintaa_varten = new List<int>();
     List<int> kuinka_suuri_suora = new List<int>();
-    int [] jarjesta_kortit = new int[]{pelaajan_kortti1,pelaajan_kortti2,floppi1,floppi2,floppi3,turn,river};
-    jarjesta_kortit = jarjesta_kortit.Distinct().ToArray();
-    Array.Sort(jarjesta_kortit);
-    for(int i = jarjesta_kortit.Length-1; i > 0; i--){
-        if(jarjesta_kortit[i-1] == jarjesta_kortit[i]-1){
+    int [] kortit_jarjestyksessa = new int[]{pelaajan_kortti1,pelaajan_kortti2,floppi1,floppi2,floppi3,turn,river};
+    kortit_jarjestyksessa = kortit_jarjestyksessa.Distinct().ToArray();
+    Array.Sort(kortit_jarjestyksessa);
+    for(int i = kortit_jarjestyksessa.Length-1; i > 0; i--){
+        
+        if(kortit_jarjestyksessa[i-1] == kortit_jarjestyksessa[i]-1){
             suoran_laskuri++;
-            kuinka_suuri_suora.Add(jarjesta_kortit[i]);
+            kuinka_suuri_suora.Add(kortit_jarjestyksessa[i]);
+            //Console.WriteLine(suoran_laskuri);
+            //Console.WriteLine(kuinka_suuri_suora.Max());
         } else{
             suoran_laskuri = 0;
             kuinka_suuri_suora.Clear();
         }
         if(suoran_laskuri == 4){
+            if(kuinka_suuri_suora.Max() == 14){
+                Console.WriteLine($"Suora: ässä hai");
+            } else if(kuinka_suuri_suora.Max() == 13){
+                Console.WriteLine($"Suora: kuningas hai");
+            } else if(kuinka_suuri_suora.Max() == 12){
+                Console.WriteLine($"Suora: rouva hai");
+            } else if(kuinka_suuri_suora.Max() == 11){
+                Console.WriteLine($"Suora: jätkä hai");
+            } else{
+                Console.WriteLine($"Suora: {kuinka_suuri_suora.Max()} hai");
+            }
             return kuinka_suuri_suora.Max();
+        } else if(kortit_jarjestyksessa.Contains(14) && kortit_jarjestyksessa.Contains(2) && kortit_jarjestyksessa.Contains(3) && kortit_jarjestyksessa.Contains(4) && kortit_jarjestyksessa.Contains(5) && !kortit_jarjestyksessa.Contains(6) && suoran_laskuri == 0){
+            Console.WriteLine($"Suora: 5 hai");
+            return 5;
         }
             
         }
@@ -157,11 +221,15 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     }
 
     int onko_pari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        kickeri.Clear();
         List<string> korttiArray = new List<string> {pelaajan_kortti1, pelaajan_kortti2, floppi1, floppi2, floppi3, turn, river};
         int indeksi = 0;
         int onko_pari = 0;
         int kortin_arvo = 0;
+        int kortti_luvuksi_listaan = 0;
         List<string> parit_listassa = new List<string>{};
+        string isoin_kortti = "1s";
+        
         
         
         while(indeksi <korttiArray.Count){
@@ -169,15 +237,24 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
                 if(korttiArray[indeksi][0] == kortti[0] && korttiArray[indeksi] != kortti){
                     onko_pari++;
                     parit_listassa.Add(kortti);
-                    kortin_arvo = kortti_luvuksi(kortti);
-                    
-                    
+                    kortin_arvo = kortti_luvuksi(kortti);  
                 }
             }
             indeksi++;
         }
+        
+        foreach(string kortti in korttiArray){
+            if(!parit_listassa.Contains(kortti)){
+                kortti_luvuksi_listaan = kortti_luvuksi(kortti);
+                kickeri.Add(kortti_luvuksi_listaan);
+                if(kortti_luvuksi(kortti) > kortti_luvuksi(isoin_kortti)){
+                    isoin_kortti = kortti;
+                }
+            }
+        }
+        kickeri.Sort();
         if(onko_pari == 2){
-            Console.WriteLine($"Pelaajalla on yksi pari {parit_listassa[0]} {parit_listassa[1]}");
+            Console.WriteLine($"Pelaajalla on yksi pari {parit_listassa[0]} {parit_listassa[1]}, kickerillä {isoin_kortti}");
             return kortin_arvo;
         } else{
         return 0;
@@ -186,12 +263,15 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     }
 
     List<string> onko_kaksi_paria(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        kickeri.Clear();
         List<string> korttiArray = new List<string> {pelaajan_kortti1, pelaajan_kortti2, floppi1, floppi2, floppi3, turn, river};
         List<int> parit = new List<int>{};
         List<string> parit_kortteina = new List<string>{};
         int indeksi = 0;
         int onko_pari = 0;
         int kortin_arvo = 0;
+        
+        string isoin_kortti = "1s";
         
         
         while(indeksi <korttiArray.Count){
@@ -200,27 +280,60 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
                     onko_pari++;
                     parit_kortteina.Add(kortti);
                     kortin_arvo = kortti_luvuksi(kortti);
-                    parit.Add(kortin_arvo);
-                    
-                    
-                    
-                }
+                    parit.Add(kortin_arvo);  
+                } 
             }
             indeksi++;
         }
+        foreach(string kortti in korttiArray){
+            if(!parit_kortteina.Contains(kortti)){
+                int kortti_numerona = kortti_luvuksi(kortti);
+                kickeri.Add(kortti_numerona);
+                if(kortti_luvuksi(kortti) > kortti_luvuksi(isoin_kortti)){
+                    isoin_kortti = kortti;
+
+                }
+            }
+        }
         if(onko_pari == 4){
+            
             parit.Sort();
             parit_kortteina.Sort();
-            Console.WriteLine($"Pelaajalla on kaksi paria, {parit_kortteina[0]} {parit_kortteina[1]} ja {parit_kortteina[2]} {parit_kortteina[3]}");
+            Console.WriteLine($"Pelaajalla on kaksi paria, {parit_kortteina[0]} {parit_kortteina[1]} ja {parit_kortteina[2]} {parit_kortteina[3]} kickerillä {isoin_kortti}");
             return parit_kortteina;
         } else{
         return null;
         }
         
     }
+    List<int> vertaile_kickereita(List<int> lista1, List<int> lista2){
+        lista1.Sort();
+        lista2.Sort();
+        for(int i = 0; i< lista1.Count-1;i++){
+            if(lista1[i] > lista2[i]){
+                return lista1;
+            } else if(lista2[i] > lista1[i]){
+                return lista2;
+            }
+        }
+        return tasapeli;
 
-    int testi = onko_pari("Ah","Jh","7d","6c","2h","Kc","Ac");
-    Console.WriteLine(testi);
-    List<string> testi2 = onko_kaksi_paria("Kh", "Qc","Qh", "6c", "2h","3d", "3h");
-    Console.WriteLine(testi2[0]);
+    }
+    /*string pelaajan_korit = jaa_pelaajan_kortit();
+    string vastustajan_kortit = jaa_vastustajan_kortit();
+    string pelaajan_kortti_eka = pelaajan_korit.Substring(0,2);
+    string pelaajan_kortti_toka = pelaajan_korit.Substring(2,2);
+    string vastustajan_kortti_eka = vastustajan_kortit.Substring(0,2);
+    string vastustajan_kortti_toka = vastustajan_kortit.Substring(2,2);
+    string floppi = jaa_floppi();
+    string floppi1 = floppi.Substring(0,2);
+    string floppi2 = floppi.Substring(2,2);
+    string floppi3 = floppi.Substring(4,2);
+    Console.WriteLine($"Pelaajan kortit: {pelaajan_kortti_eka} {pelaajan_kortti_toka}");
+    Console.WriteLine($"Vastustajan kortit: {vastustajan_kortti_eka} {vastustajan_kortti_toka}");
+    Console.WriteLine($"{floppi1} {floppi2} {floppi3} {jaa_turni()} {jaa_riveri()}");
+    sekoita();
+    */
+    Console.WriteLine("Pelaajan käsi: ");
+    onko_suora(14,2,5,6, 3, 4,13);
     
