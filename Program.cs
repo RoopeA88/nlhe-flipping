@@ -319,6 +319,32 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
         return tasapeli;
 
     }
+    int onko_kolmoset(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        List<string> kortit = new List<string>{pelaajan_kortti1, pelaajan_kortti2, floppi1, floppi2, floppi3, turn, river};
+        kickeri.Clear();
+        List<string> parilliset_kortit = new List<string>();
+        int onko_sama = 0;
+        for(int i = 0; i<7;i++){
+            foreach(string kortti in kortit){
+                if(kortti != kortit[i] && kortti[0] == kortit[i][0]){
+                    onko_sama++;
+                    parilliset_kortit.Add(kortti);
+                    
+                }
+            }
+        }
+        foreach(string kortti in kortit){
+            if(!parilliset_kortit.Contains(kortti)){
+                kickeri.Add(kortti[0]);
+            }
+        }
+        if(onko_sama == 6){
+            Console.WriteLine($"Pelaajalla on kolmoset: {parilliset_kortit[0]} {parilliset_kortit[1]} {parilliset_kortit[2]} ");
+            return kortti_luvuksi(parilliset_kortit[0]);
+        } else{
+            return 0;
+        }
+    }
     /*string pelaajan_korit = jaa_pelaajan_kortit();
     string vastustajan_kortit = jaa_vastustajan_kortit();
     string pelaajan_kortti_eka = pelaajan_korit.Substring(0,2);
@@ -335,5 +361,6 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     sekoita();
     */
     Console.WriteLine("Pelaajan käsi: ");
-    onko_suora(14,2,5,6, 3, 4,13);
+    int moi = onko_kolmoset("3d","3h","Jh","9h", "10s", "3c","Qs");
+    Console.WriteLine(moi);
     
