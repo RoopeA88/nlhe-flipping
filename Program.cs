@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.ComponentModel;
 using System.Configuration.Assemblies;
+using System.Security;
 Random random = new Random();
 
 string [] kortit = new string[]{"Ah","2h","3h","4h","5h","6h","7h","8h","9h","Th","Jh","Qh","Kh",
@@ -15,6 +16,7 @@ string pelaajan_kortti1;
 string pelaajan_kortti2;
 List<int> kickeri = new List<int>{};
 List<int> tasapeli = new List<int>{0};
+List<int> tietokoneen_kickeri = new List<int>{};
 
 string jaa_floppi(){
     int random_luku1 = random.Next(0,48);
@@ -91,7 +93,8 @@ int kortti_luvuksi(string kortti){
     }
     return kortti_numerona;
 }
-int onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+int onko_vari(string pelaaja,string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+    
     int diamond = 0;
     int club = 0;
     int spade = 0;
@@ -102,10 +105,14 @@ int onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, 
     int isoin_h = 2;
     string [] lista = new string[]{pelaajan_kortti1, pelaajan_kortti2, floppi1,floppi2,floppi3,turn,river};
     foreach(string kortti in lista){
+        
         if(kortti[1] == 'd'){
+            
             diamond++;
+            //Console.WriteLine("testi");
             if(kortti_luvuksi(kortti) > isoin_d){
                 isoin_d = kortti_luvuksi(kortti);
+
             }
         }else if(kortti[1] == 'h'){
             heart++;
@@ -124,7 +131,20 @@ int onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, 
             }
         }
     }
-    if(diamond >4){
+    if(diamond > 4){
+        //Console.WriteLine("testi");
+        foreach(string kortti in lista){
+            
+            if(pelaaja == "mina" && kortti[1] == 'd'){
+               Console.WriteLine($"listaan pistettavat kortit: {kortti} ");
+                kickeri.Add(kortti_luvuksi(kortti));
+                
+            } else if(pelaaja == "tietokone"){
+                if(kortti[1] == 'd'){
+                    tietokoneen_kickeri.Add(kortti_luvuksi(kortti));
+                }
+            }
+        }
         if(isoin_d == 14){
             Console.WriteLine("väri: ässä hai");
         } else if(isoin_d == 13){
@@ -136,8 +156,24 @@ int onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, 
         } else{
             Console.WriteLine($"väri {isoin_d} hai");
         }
+        if(kickeri.Any() && pelaaja == "mina"){
+            Console.WriteLine($"tämä on olevinaan max: {kickeri.Max()}");
+            kickeri.Remove(kickeri.Max());
+        } if(tietokoneen_kickeri.Any() && pelaaja=="tietokone"){
+            tietokoneen_kickeri.Remove(tietokoneen_kickeri.Max());
+        }
+        
+        
         return isoin_d;
     } else if(heart > 4){
+        foreach(string kortti in lista){
+            if(kortti[1] == 'h' && pelaaja == "mina"){
+                
+                kickeri.Add(kortti_luvuksi(kortti));
+            } else if(kortti[1] == heart && pelaaja =="tietokone"){
+                tietokoneen_kickeri.Add(kortti_luvuksi(kortti));
+            }
+        }
           if(isoin_h == 14){
             Console.WriteLine("väri: ässä hai");
         } else if(isoin_h == 13){
@@ -149,8 +185,20 @@ int onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, 
         } else{
             Console.WriteLine($"väri {isoin_h} hai");
         }
+        if(kickeri.Any() && pelaaja == "mina"){
+            kickeri.Remove(kickeri.Max());
+        } if(tietokoneen_kickeri.Any() && pelaaja=="tietokone"){
+            tietokoneen_kickeri.Remove(tietokoneen_kickeri.Max());
+        }
         return isoin_h;
     } else if(spade > 4){
+        foreach(string kortti in lista){
+            if(kortti[1] == 's' && pelaaja == "mina"){
+                kickeri.Add(kortti_luvuksi(kortti));
+            } else if(kortti[1] == 's' && pelaaja =="tietokone"){
+                tietokoneen_kickeri.Add(kortti_luvuksi(kortti));
+            }
+        }
           if(isoin_s == 14){
             Console.WriteLine("väri: ässä hai");
         } else if(isoin_s == 13){
@@ -162,8 +210,20 @@ int onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, 
         } else{
             Console.WriteLine($"väri {isoin_s} hai");
         }
+        if(kickeri.Any() && pelaaja == "mina"){
+            kickeri.Remove(kickeri.Max());
+        } if(tietokoneen_kickeri.Any() && pelaaja=="tietokone"){
+            tietokoneen_kickeri.Remove(tietokoneen_kickeri.Max());
+        }
         return isoin_s;
     } else if(club > 4){
+        foreach(string kortti in lista){
+            if(kortti[1] == 'c' && pelaaja == "mina"){
+                kickeri.Add(kortti_luvuksi(kortti));
+            } else if(kortti[1] == 's' && pelaaja =="tietokone"){
+                tietokoneen_kickeri.Add(kortti_luvuksi(kortti));
+            }
+        }
           if(isoin_c == 14){
             Console.WriteLine("väri: ässä hai");
         } else if(isoin_c == 13){
@@ -174,6 +234,11 @@ int onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, 
             Console.WriteLine("väri: jätkä hai");
         } else{
             Console.WriteLine($"väri {isoin_c} hai");
+        }
+        if(kickeri.Any() && pelaaja == "mina"){
+            kickeri.Remove(kickeri.Max());
+        } if(tietokoneen_kickeri.Any() && pelaaja == "tietokone"){
+            tietokoneen_kickeri.Remove(tietokoneen_kickeri.Max());
         }
         return isoin_c;
     } else{
@@ -306,17 +371,20 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
         }
         
     }
-    List<int> vertaile_kickereita(List<int> lista1, List<int> lista2){
+    int vertaile_kickereita(List<int> lista1, List<int> lista2){
         lista1.Sort();
         lista2.Sort();
-        for(int i = 0; i< lista1.Count-1;i++){
+        
+        for(int i = lista1.Count-1; i>=0;i--){
+            Console.WriteLine(lista1[i]);
+            Console.WriteLine(lista2[i]);
             if(lista1[i] > lista2[i]){
-                return lista1;
+                return 1;
             } else if(lista2[i] > lista1[i]){
-                return lista2;
+                return 2;
             }
         }
-        return tasapeli;
+        return 0;
 
     }
     int onko_kolmoset(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
@@ -345,6 +413,7 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
             return 0;
         }
     }
+    
     /*string pelaajan_korit = jaa_pelaajan_kortit();
     string vastustajan_kortit = jaa_vastustajan_kortit();
     string pelaajan_kortti_eka = pelaajan_korit.Substring(0,2);
@@ -361,6 +430,11 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     sekoita();
     */
     Console.WriteLine("Pelaajan käsi: ");
-    int moi = onko_kolmoset("3d","3h","Jh","9h", "10s", "3c","Qs");
+    int moi = onko_vari("mina","3d","3h","Jd","9h", "Td", "4d","Qd");
     Console.WriteLine(moi);
+    
+    int moi2 = onko_vari("tietokone","5d","3h","Jd","9h","Td","4d", "Qd");
+    Console.WriteLine(moi2);
+    int kumpi_voitti = vertaile_kickereita(kickeri,tietokoneen_kickeri);
+    Console.WriteLine(kumpi_voitti);
     
