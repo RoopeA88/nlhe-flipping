@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.ComponentModel;
 using System.Configuration.Assemblies;
+using System.Runtime.CompilerServices;
 using System.Security;
 Random random = new Random();
 
@@ -379,8 +380,10 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
             Console.WriteLine(lista1[i]);
             Console.WriteLine(lista2[i]);
             if(lista1[i] > lista2[i]){
+                Console.WriteLine($"Pelaaja voittaa kickerillä {lista1[i]}");
                 return 1;
             } else if(lista2[i] > lista1[i]){
+                Console.WriteLine($"Tietokone voittaa kickerillä {lista2[i]}");
                 return 2;
             }
         }
@@ -417,20 +420,55 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     int onko_tayskasi(string pelaaja,string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
         List<string> lista = new List<string>{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};
         List<string> tayskasi = new List<string>();
+        List<string> kolmoset = new List<string>();
+        List<string> pari = new List<string>();
+        string kortti = "";
         int indeksi = 0;
+        int kuinka_monta_korttia = 0;
         while(indeksi < lista.Count){
             for(int j = 0; j< lista.Count; j++){
                 if(lista[indeksi][0] == lista[j][0] && !tayskasi.Contains(lista[indeksi]) && lista[indeksi] != lista[j]){
                     tayskasi.Add(lista[indeksi]);
-                    Console.WriteLine(lista[indeksi]);
+                    //Console.WriteLine(lista[indeksi]);
                     //Console.WriteLine("testi");
                 }
             }
             indeksi++;
         }
-        Console.WriteLine(tayskasi.Count);
+        //Console.WriteLine(tayskasi.Count);
+        indeksi = 0;
+        string testataan_korttia = "";
         if(tayskasi.Count == 5){
-            return 1;
+            while(indeksi < tayskasi.Count){
+                
+                testataan_korttia = tayskasi[indeksi];
+                for(int i = 0; i<tayskasi.Count;i++){
+                    if(testataan_korttia[0] == tayskasi[i][0] && testataan_korttia != tayskasi[i]){
+                        Console.WriteLine(testataan_korttia);
+                        kuinka_monta_korttia++; 
+                        //Console.WriteLine(tayskasi[indeksi]);
+                        
+                        if(kuinka_monta_korttia == 3){
+                            Console.WriteLine(testataan_korttia);
+                        kortti = tayskasi[indeksi];
+                        kolmoset.Add(testataan_korttia);
+                    }
+                    }
+                    
+                }
+                indeksi++;
+            }
+            indeksi = 0;
+            while(indeksi < tayskasi.Count){
+                if(tayskasi[indeksi][0] != kortti[0]){
+                    pari.Add(tayskasi[indeksi]);
+                }
+                indeksi++;
+            }
+
+            Console.WriteLine(kuinka_monta_korttia);
+            Console.WriteLine($"Pelaajalla on täyskäsi {kolmoset[0][0]} täynnä {pari[0][0]}");
+            return kortti_luvuksi(kolmoset[0]);
         } else{
             return 0;
         }
@@ -452,7 +490,7 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     sekoita();
     */
     Console.WriteLine("Pelaajan käsi: ");
-    int moi = onko_tayskasi("mina","3d","3h","3s","9h", "Td", "9d","Qd");
+    int moi = onko_tayskasi("mina","2c","2h","Qc","Ts", "2s", "Kc","Qd");
     Console.WriteLine(moi);
     
     //int moi2 = onko_vari("tietokone","5d","3h","Jd","9h","Td","4d", "Qd");
