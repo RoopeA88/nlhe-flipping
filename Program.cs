@@ -413,6 +413,28 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
             return 0;
         }
     }
+
+    int onko_tayskasi(string pelaaja,string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        List<string> lista = new List<string>{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};
+        List<string> tayskasi = new List<string>();
+        int indeksi = 0;
+        while(indeksi < lista.Count){
+            for(int j = 0; j< lista.Count; j++){
+                if(lista[indeksi][0] == lista[j][0] && !tayskasi.Contains(lista[indeksi]) && lista[indeksi] != lista[j]){
+                    tayskasi.Add(lista[indeksi]);
+                    Console.WriteLine(lista[indeksi]);
+                    //Console.WriteLine("testi");
+                }
+            }
+            indeksi++;
+        }
+        Console.WriteLine(tayskasi.Count);
+        if(tayskasi.Count == 5){
+            return 1;
+        } else{
+            return 0;
+        }
+    }
     
     /*string pelaajan_korit = jaa_pelaajan_kortit();
     string vastustajan_kortit = jaa_vastustajan_kortit();
@@ -430,11 +452,11 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     sekoita();
     */
     Console.WriteLine("Pelaajan käsi: ");
-    int moi = onko_vari("mina","3d","3h","Jd","9h", "Td", "4d","Qd");
+    int moi = onko_tayskasi("mina","3d","3h","3s","9h", "Td", "9d","Qd");
     Console.WriteLine(moi);
     
-    int moi2 = onko_vari("tietokone","5d","3h","Jd","9h","Td","4d", "Qd");
-    Console.WriteLine(moi2);
-    int kumpi_voitti = vertaile_kickereita(kickeri,tietokoneen_kickeri);
-    Console.WriteLine(kumpi_voitti);
+    //int moi2 = onko_vari("tietokone","5d","3h","Jd","9h","Td","4d", "Qd");
+    //Console.WriteLine(moi2);
+    //int kumpi_voitti = vertaile_kickereita(kickeri,tietokoneen_kickeri);
+    //Console.WriteLine(kumpi_voitti);
     
