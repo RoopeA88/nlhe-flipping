@@ -422,9 +422,10 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
         List<string> tayskasi = new List<string>();
         List<string> kolmoset = new List<string>();
         List<string> pari = new List<string>();
-        string kortti = "";
+        
+        
         int indeksi = 0;
-        int kuinka_monta_korttia = 0;
+        
         while(indeksi < lista.Count){
             for(int j = 0; j< lista.Count; j++){
                 if(lista[indeksi][0] == lista[j][0] && !tayskasi.Contains(lista[indeksi]) && lista[indeksi] != lista[j]){
@@ -439,29 +440,80 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
         
         
         
-        if(tayskasi.Count == 5){
+        if(tayskasi.Count == 5 && pelaaja == "pelaaja"){
+            kickeri.Clear();
             tayskasi.Sort();
             if(kortti_luvuksi(tayskasi[0]) == kortti_luvuksi(tayskasi[1]) && tayskasi[0][0] != tayskasi[2][0]){
                 pari.Add(tayskasi[0]);
                 kolmoset.Add(tayskasi[2]);
                 Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                kickeri.Add(kortti_luvuksi(pari[0]));
+                kickeri.Add(kortti_luvuksi(pari[0]));
                 return kortti_luvuksi(kolmoset[0]);
             } else if(tayskasi[0][0] == tayskasi[2][0]){
                 kolmoset.Add(tayskasi[0]);
                 pari.Add(tayskasi[3]);
+                kickeri.Add(kortti_luvuksi(pari[0]));
+                kickeri.Add(kortti_luvuksi(pari[0]));
                 Console.WriteLine($"Pelaajalla on täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+            
                 return kortti_luvuksi(kolmoset[0]);
             }
-        } else if(tayskasi.Count == 6){
+        } else if(tayskasi.Count == 6 && pelaaja == "pelaaja"){
             tayskasi.Sort();
+            kickeri.Clear();
             if(kortti_luvuksi(tayskasi[0]) > kortti_luvuksi(tayskasi[3])){
                 kolmoset.Add(tayskasi[0]);
                 pari.Add(tayskasi[3]);
+                kickeri.Add(kortti_luvuksi(pari[0]));
+                kickeri.Add(kortti_luvuksi(pari[0]));
                 Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
                 return kortti_luvuksi(kolmoset[0]);
             } else{
                 kolmoset.Add(tayskasi[3]);
                 pari.Add(tayskasi[0]);
+                kickeri.Add(kortti_luvuksi(pari[0]));
+                kickeri.Add(kortti_luvuksi(pari[0]));
+                Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                return kortti_luvuksi(kolmoset[0]);
+            }
+        }
+
+        //tietokone
+        if(tayskasi.Count == 5 && pelaaja == "tietokone"){
+            tietokoneen_kickeri.Clear();
+            tayskasi.Sort();
+            if(kortti_luvuksi(tayskasi[0]) == kortti_luvuksi(tayskasi[1]) && tayskasi[0][0] != tayskasi[2][0]){
+                pari.Add(tayskasi[0]);
+                kolmoset.Add(tayskasi[2]);
+                Console.WriteLine($"Tietokoneella on täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                tietokoneen_kickeri.Add(kortti_luvuksi(pari[0]));
+                tietokoneen_kickeri.Add(kortti_luvuksi(pari[0]));
+                return kortti_luvuksi(kolmoset[0]);
+            } else if(tayskasi[0][0] == tayskasi[2][0]){
+                kolmoset.Add(tayskasi[0]);
+                pari.Add(tayskasi[3]);
+                tietokoneen_kickeri.Add(kortti_luvuksi(pari[0]));
+                tietokoneen_kickeri.Add(kortti_luvuksi(pari[0]));
+                Console.WriteLine($"Tietokoneella on täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+            
+                return kortti_luvuksi(kolmoset[0]);
+            }
+        } else if(tayskasi.Count == 6 && pelaaja == "pelaaja"){
+            tietokoneen_kickeri.Clear();
+            tayskasi.Sort();
+            if(kortti_luvuksi(tayskasi[0]) > kortti_luvuksi(tayskasi[3])){
+                kolmoset.Add(tayskasi[0]);
+                pari.Add(tayskasi[3]);
+                tietokoneen_kickeri.Add(kortti_luvuksi(pari[0]));
+                tietokoneen_kickeri.Add(kortti_luvuksi(pari[0]));
+                Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                return kortti_luvuksi(kolmoset[0]);
+            } else{
+                kolmoset.Add(tayskasi[3]);
+                pari.Add(tayskasi[0]);
+                tietokoneen_kickeri.Add(kortti_luvuksi(pari[0]));
+                tietokoneen_kickeri.Add(kortti_luvuksi(pari[0]));
                 Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
                 return kortti_luvuksi(kolmoset[0]);
             }
@@ -492,8 +544,11 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     sekoita();
     */
     Console.WriteLine("Pelaajan käsi: ");
-    int moi = onko_tayskasi("mina","Kd","Kh","Qc","2s", "3s", "Kc","Qd");
-    Console.WriteLine(moi);
+    int pelaaja = onko_tayskasi("pelaaja","2d","2c","Qc","Qs", "4s", "Kc","Qd");
+    int tietokone = onko_tayskasi("tietokone","3c","3d","Qc","Qs","4s","Kc", "Qd");
+    List<int> testi = new List<int>{0};
+    List<int> testi2 = new List<int>{1};
+    Console.WriteLine(vertaile_kickereita(kickeri, tietokoneen_kickeri));
     
     //int moi2 = onko_vari("tietokone","5d","3h","Jd","9h","Td","4d", "Qd");
     //Console.WriteLine(moi2);
