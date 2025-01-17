@@ -436,43 +436,31 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
             indeksi++;
         }
         //Console.WriteLine(tayskasi.Count);
-        indeksi = 0;
+        
         string testataan_korttia = "";
         if(tayskasi.Count == 5){
-            while(indeksi < tayskasi.Count){
-                
-                testataan_korttia = tayskasi[indeksi];
-                for(int i = 0; i<tayskasi.Count;i++){
-                    if(testataan_korttia[0] == tayskasi[i][0] && testataan_korttia != tayskasi[i]){
-                        Console.WriteLine(testataan_korttia);
-                        kuinka_monta_korttia++; 
-                        //Console.WriteLine(tayskasi[indeksi]);
-                        
-                        if(kuinka_monta_korttia == 3){
-                            Console.WriteLine(testataan_korttia);
-                        kortti = tayskasi[indeksi];
-                        kolmoset.Add(testataan_korttia);
-                    }
-                    }
-                    
-                }
-                indeksi++;
+            tayskasi.Sort();
+            if(tayskasi[0][0] == tayskasi[1][0] && tayskasi[0][0] != tayskasi[2][0]){
+                pari.Add(tayskasi[0]);
+                kolmoset.Add(tayskasi[2]);
+                Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                return kortti_luvuksi(kolmoset[0]);
+            } else if(tayskasi[0][0] == tayskasi[2][0]){
+                kolmoset.Add(tayskasi[0]);
+                pari.Add(tayskasi[3]);
+                Console.WriteLine($"Pelaajalla on täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                return kortti_luvuksi(kolmoset[0]);
             }
-            indeksi = 0;
-            while(indeksi < tayskasi.Count){
-                if(tayskasi[indeksi][0] != kortti[0]){
-                    pari.Add(tayskasi[indeksi]);
-                }
-                indeksi++;
-            }
-
-            Console.WriteLine(kuinka_monta_korttia);
-            Console.WriteLine($"Pelaajalla on täyskäsi {kolmoset[0][0]} täynnä {pari[0][0]}");
-            return kortti_luvuksi(kolmoset[0]);
-        } else{
-            return 0;
         }
-    }
+           return 0;         
+        }
+                
+            
+            
+            
+
+         
+    
     
     /*string pelaajan_korit = jaa_pelaajan_kortit();
     string vastustajan_kortit = jaa_vastustajan_kortit();
@@ -490,7 +478,7 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     sekoita();
     */
     Console.WriteLine("Pelaajan käsi: ");
-    int moi = onko_tayskasi("mina","2c","2h","Qc","Ts", "2s", "Kc","Qd");
+    int moi = onko_tayskasi("mina","2c","3h","Qc","Qs", "3s", "Kc","Qd");
     Console.WriteLine(moi);
     
     //int moi2 = onko_vari("tietokone","5d","3h","Jd","9h","Td","4d", "Qd");
