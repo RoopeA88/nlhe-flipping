@@ -431,16 +431,17 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
                     tayskasi.Add(lista[indeksi]);
                     //Console.WriteLine(lista[indeksi]);
                     //Console.WriteLine("testi");
+                    
                 }
             }
             indeksi++;
         }
-        //Console.WriteLine(tayskasi.Count);
         
-        string testataan_korttia = "";
+        
+        
         if(tayskasi.Count == 5){
             tayskasi.Sort();
-            if(tayskasi[0][0] == tayskasi[1][0] && tayskasi[0][0] != tayskasi[2][0]){
+            if(kortti_luvuksi(tayskasi[0]) == kortti_luvuksi(tayskasi[1]) && tayskasi[0][0] != tayskasi[2][0]){
                 pari.Add(tayskasi[0]);
                 kolmoset.Add(tayskasi[2]);
                 Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
@@ -449,6 +450,19 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
                 kolmoset.Add(tayskasi[0]);
                 pari.Add(tayskasi[3]);
                 Console.WriteLine($"Pelaajalla on täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                return kortti_luvuksi(kolmoset[0]);
+            }
+        } else if(tayskasi.Count == 6){
+            tayskasi.Sort();
+            if(kortti_luvuksi(tayskasi[0]) > kortti_luvuksi(tayskasi[3])){
+                kolmoset.Add(tayskasi[0]);
+                pari.Add(tayskasi[3]);
+                Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                return kortti_luvuksi(kolmoset[0]);
+            } else{
+                kolmoset.Add(tayskasi[3]);
+                pari.Add(tayskasi[0]);
+                Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
                 return kortti_luvuksi(kolmoset[0]);
             }
         }
@@ -478,7 +492,7 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     sekoita();
     */
     Console.WriteLine("Pelaajan käsi: ");
-    int moi = onko_tayskasi("mina","2c","3h","Qc","Qs", "3s", "Kc","Qd");
+    int moi = onko_tayskasi("mina","Kd","Kh","Qc","2s", "3s", "Kc","Qd");
     Console.WriteLine(moi);
     
     //int moi2 = onko_vari("tietokone","5d","3h","Jd","9h","Td","4d", "Qd");
