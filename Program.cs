@@ -520,6 +520,53 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
         }
            return 0;         
         }
+        int onko_neloset(string pelaaja, string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+            List<string> lista = new List<string>{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};
+            List<string> neloset = new List<string>();
+            int indeksi = 0;
+            while(indeksi < lista.Count()){
+                for(int i = 0; i< lista.Count; i++){
+                    if(kortti_luvuksi(lista[indeksi]) == kortti_luvuksi(lista[i]) && lista[indeksi] != lista[i] && !neloset.Contains(lista[indeksi])){
+                        Console.WriteLine(lista[indeksi]);
+                        neloset.Add(lista[indeksi]);
+                    }
+                }
+                indeksi++;
+            }
+            if(neloset.Count == 4 && kortti_luvuksi(neloset[0]) == kortti_luvuksi(neloset[1]) && kortti_luvuksi(neloset[0]) == kortti_luvuksi(neloset[2])
+            && kortti_luvuksi(neloset[0]) == kortti_luvuksi(neloset[3])){
+                return kortti_luvuksi(neloset[0]);
+            }
+            else if(neloset.Count == 6){
+                //Console.WriteLine(neloset.Count);
+                neloset.Sort();
+                if(kortti_luvuksi(neloset[0]) == kortti_luvuksi(neloset[3])){
+                    return kortti_luvuksi(neloset[0]);
+                } else if(kortti_luvuksi(neloset[2]) == kortti_luvuksi(neloset[5])){
+                    return kortti_luvuksi(neloset[2]);
+                } else{
+                    return 0;
+                }
+                    
+                } else if(neloset.Count == 7){
+                    neloset.Sort();
+                    if(kortti_luvuksi(neloset[0]) == kortti_luvuksi(neloset[3])){
+                        return kortti_luvuksi(neloset[0]);
+                    } else{
+                        return kortti_luvuksi(neloset[3]);
+                    }
+                } else{
+                    return 0;
+                }
+                    
+        }
+                
+                
+                    
+                 
+                
+            
+        
                 
             
             
@@ -544,11 +591,12 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     sekoita();
     */
     Console.WriteLine("Pelaajan käsi: ");
-    int pelaaja = onko_tayskasi("pelaaja","2d","2c","Qc","Qs", "4s", "Kc","Qd");
-    int tietokone = onko_tayskasi("tietokone","3c","3d","Qc","Qs","4s","Kc", "Qd");
-    List<int> testi = new List<int>{0};
-    List<int> testi2 = new List<int>{1};
-    Console.WriteLine(vertaile_kickereita(kickeri, tietokoneen_kickeri));
+    int pelaaja = onko_neloset("pelaaja","2d","2c","Jc","2h", "Jd", "Jh","2s");
+    Console.WriteLine(pelaaja);
+    // int tietokone = onko_tayskasi("tietokone","3c","3d","Qc","Qs","4s","Kc", "Qd");
+    // List<int> testi = new List<int>{0};
+    // List<int> testi2 = new List<int>{1};
+    // Console.WriteLine(vertaile_kickereita(kickeri, tietokoneen_kickeri));
     
     //int moi2 = onko_vari("tietokone","5d","3h","Jd","9h","Td","4d", "Qd");
     //Console.WriteLine(moi2);
