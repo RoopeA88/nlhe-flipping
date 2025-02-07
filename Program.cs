@@ -560,6 +560,23 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
                 }
                     
         }
+        int onko_varisuora(string pelaaja,string kortti1,string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+            string[] lista = new string[]{kortti2, kortti2, floppi1, floppi2, floppi3, turn, river};
+            List<int> hertta = new List<int>();
+            List<int> pata = new List<int>();
+            List<int> risti = new List<int>();
+            List<int> ruutu = new List<int>();
+            for(int i = 0; i<lista.Length;i++){
+                if(lista[i][1] == 'h'){
+                    hertta.Add(kortti_luvuksi(lista[1]));
+                } else if(lista[i][1] == 's'){
+                    pata.Add(kortti_luvuksi(lista[i]));
+                } else if(lista[i][1] == 'c'){
+                    
+                }
+            }
+
+        }
                 
                 
                     
