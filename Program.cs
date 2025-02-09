@@ -1,4 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
+
+
+
+
+    
+
+
 using System.ComponentModel;
 using System.Configuration.Assemblies;
 using System.Runtime.CompilerServices;
