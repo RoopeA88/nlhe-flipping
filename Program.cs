@@ -246,7 +246,7 @@ int onko_vari(string pelaaja,string pelaajan_kortti1, string pelaajan_kortti2, s
         return 0;
     }
 }
-int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int floppi2, int floppi3, int turn, int river){
+int onko_suora(string varisuora_vai_suora,int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int floppi2, int floppi3, int turn, int river){
     int suoran_laskuri = 0;
     List<int> lista_assan_toimintaa_varten = new List<int>();
     List<int> kuinka_suuri_suora = new List<int>();
@@ -264,7 +264,7 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
             suoran_laskuri = 0;
             kuinka_suuri_suora.Clear();
         }
-        if(suoran_laskuri == 4){
+        if(suoran_laskuri == 4 && varisuora_vai_suora == "suora"){
             if(kuinka_suuri_suora.Max() == 14){
                 Console.WriteLine($"Suora: ässä hai");
             } else if(kuinka_suuri_suora.Max() == 13){
@@ -277,12 +277,30 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
                 Console.WriteLine($"Suora: {kuinka_suuri_suora.Max()} hai");
             }
             return kuinka_suuri_suora.Max();
-        } else if(kortit_jarjestyksessa.Contains(14) && kortit_jarjestyksessa.Contains(2) && kortit_jarjestyksessa.Contains(3) && kortit_jarjestyksessa.Contains(4) && kortit_jarjestyksessa.Contains(5) && !kortit_jarjestyksessa.Contains(6) && suoran_laskuri == 0){
+        } else if( varisuora_vai_suora == "suora" && kortit_jarjestyksessa.Contains(14) && kortit_jarjestyksessa.Contains(2) && kortit_jarjestyksessa.Contains(3) && kortit_jarjestyksessa.Contains(4) && kortit_jarjestyksessa.Contains(5) && !kortit_jarjestyksessa.Contains(6) && suoran_laskuri == 0){
             Console.WriteLine($"Suora: 5 hai");
+            return 5;
+        } 
+            
+        if(suoran_laskuri == 4 && varisuora_vai_suora == "värisuora"){
+            if(kuinka_suuri_suora.Max() == 14){
+                Console.WriteLine($"Värisuora: ässä hai");
+            } else if(kuinka_suuri_suora.Max() == 13){
+                Console.WriteLine($"Värisuora: kuningas hai");
+            } else if(kuinka_suuri_suora.Max() == 12){
+                Console.WriteLine($"Värisuora: rouva hai");
+            } else if(kuinka_suuri_suora.Max() == 11){
+                Console.WriteLine($"Värisuora: jätkä hai");
+            } else{
+                Console.WriteLine($"Värisuora: {kuinka_suuri_suora.Max()} hai");
+            }
+            return kuinka_suuri_suora.Max();
+        } else if(varisuora_vai_suora == "värisuora" && kortit_jarjestyksessa.Contains(14) && kortit_jarjestyksessa.Contains(2) && kortit_jarjestyksessa.Contains(3) && kortit_jarjestyksessa.Contains(4) && kortit_jarjestyksessa.Contains(5) && !kortit_jarjestyksessa.Contains(6) && suoran_laskuri == 0){
+            Console.WriteLine($"Värisuora: 5 hai");
             return 5;
         }
             
-        }
+    }
         return 0;
     }
 
@@ -561,19 +579,50 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
                     
         }
         int onko_varisuora(string pelaaja,string kortti1,string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
-            string[] lista = new string[]{kortti2, kortti2, floppi1, floppi2, floppi3, turn, river};
+            string[] lista = new string[]{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};
             List<int> hertta = new List<int>();
             List<int> pata = new List<int>();
             List<int> risti = new List<int>();
             List<int> ruutu = new List<int>();
             for(int i = 0; i<lista.Length;i++){
                 if(lista[i][1] == 'h'){
-                    hertta.Add(kortti_luvuksi(lista[1]));
+                    hertta.Add(kortti_luvuksi(lista[i]));
                 } else if(lista[i][1] == 's'){
                     pata.Add(kortti_luvuksi(lista[i]));
                 } else if(lista[i][1] == 'c'){
-                    
+                    risti.Add(kortti_luvuksi(lista[i]));
+                } else{
+                    ruutu.Add(kortti_luvuksi(lista[i]));
                 }
+            }
+            if(hertta.Count == 5){
+                
+                return onko_suora("värisuora",hertta[0],hertta[1],hertta[2],hertta[3],hertta[4],-1,-1);
+            } else if(pata.Count == 5){
+                return onko_suora("värisuora",pata[0],pata[1],pata[2],pata[3],pata[4],-1,-1);
+            } else if(risti.Count == 5){
+                return onko_suora("värisuora",risti[0],risti[1],risti[2],risti[3],risti[4],-1,-1);
+            } else if(ruutu.Count == 5){
+                return onko_suora("värisuora",ruutu[0],ruutu[1],ruutu[2],ruutu[3],ruutu[4],-1,-1);
+            }
+            else if(hertta.Count == 6){
+                return onko_suora("värisuora",hertta[0],hertta[1],hertta[2],hertta[3],hertta[4],hertta[5],-1);
+            } else if(pata.Count == 6){
+                return onko_suora("värisuora",pata[0],pata[1],pata[2],pata[3],pata[4],pata[5],-1);
+            } else if(risti.Count == 6){
+                return onko_suora("värisuora",risti[0],risti[1],risti[2],risti[3],risti[4],risti[5],-1);
+            } else if(ruutu.Count == 6){
+                return onko_suora("värisuora",ruutu[0],ruutu[1],ruutu[2],ruutu[3],ruutu[4],ruutu[5],-1);
+            } else if(hertta.Count == 7){
+                return onko_suora("värisuora",hertta[0],hertta[1],hertta[2],hertta[3],hertta[4],hertta[5],hertta[6]);
+            } else if(pata.Count == 7){
+                return onko_suora("värisuora",pata[0],pata[1],pata[2],pata[3],pata[4],pata[5],pata[6]);
+            } else if(risti.Count == 7){
+                return onko_suora("värisuora",risti[0],risti[1],risti[2],risti[3],risti[4],risti[5],risti[6]);
+            } else if(ruutu.Count == 7){
+                return onko_suora("värisuora",ruutu[0],ruutu[1],ruutu[2],ruutu[3],ruutu[4],ruutu[5],ruutu[6]);
+            } else{
+                return 0;
             }
 
         }
@@ -608,8 +657,9 @@ int onko_suora(int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int flop
     sekoita();
     */
     Console.WriteLine("Pelaajan käsi: ");
-    int pelaaja = onko_neloset("pelaaja","2d","2c","Jc","2h", "Jd", "Jh","2s");
+    int pelaaja = onko_varisuora("pelaaja","Jh","Kh","Th","Qh", "Ah", "Ad","2s");
     Console.WriteLine(pelaaja);
+
     // int tietokone = onko_tayskasi("tietokone","3c","3d","Qc","Qs","4s","Kc", "Qd");
     // List<int> testi = new List<int>{0};
     // List<int> testi2 = new List<int>{1};
