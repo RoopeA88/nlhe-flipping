@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Configuration.Assemblies;
 using System.Runtime.CompilerServices;
 using System.Security;
+using NLHEFLIPPING;
 Random random = new Random();
 
 string [] kortit = new string[]{"Ah","2h","3h","4h","5h","6h","7h","8h","9h","Th","Jh","Qh","Kh",
@@ -402,8 +403,8 @@ int onko_suora(string varisuora_vai_suora,int pelaajan_kortti1, int pelaajan_kor
         lista2.Sort();
         
         for(int i = lista1.Count-1; i>=0;i--){
-            Console.WriteLine(lista1[i]);
-            Console.WriteLine(lista2[i]);
+            //Console.WriteLine(lista1[i]);
+            //Console.WriteLine(lista2[i]);
             if(lista1[i] > lista2[i]){
                 Console.WriteLine($"Pelaaja voittaa kickerillä {lista1[i]}");
                 return 1;
@@ -635,45 +636,14 @@ int onko_suora(string varisuora_vai_suora,int pelaajan_kortti1, int pelaajan_kor
         }
                 
                 
-                    
-                 
-                
-            
-        
-                
-            
-            
-            
+                      
+    Pelaaja pelaaja = new Pelaaja();
+    Kortit cards = new Kortit();
+    Pakka pakka = new Pakka(cards);
+    JaetutKortit jaetut_kortit = new JaetutKortit(pakka);
+    jaetut_kortit.jaa_kortit();
+    pelaaja.kerro_kortit();
+    jaetut_kortit.kerro_poyta();
+    Console.WriteLine(pelaaja.mika_kasi());
 
-         
-    
-    
-    /*string pelaajan_korit = jaa_pelaajan_kortit();
-    string vastustajan_kortit = jaa_vastustajan_kortit();
-    string pelaajan_kortti_eka = pelaajan_korit.Substring(0,2);
-    string pelaajan_kortti_toka = pelaajan_korit.Substring(2,2);
-    string vastustajan_kortti_eka = vastustajan_kortit.Substring(0,2);
-    string vastustajan_kortti_toka = vastustajan_kortit.Substring(2,2);
-    string floppi = jaa_floppi();
-    string floppi1 = floppi.Substring(0,2);
-    string floppi2 = floppi.Substring(2,2);
-    string floppi3 = floppi.Substring(4,2);
-    Console.WriteLine($"Pelaajan kortit: {pelaajan_kortti_eka} {pelaajan_kortti_toka}");
-    Console.WriteLine($"Vastustajan kortit: {vastustajan_kortti_eka} {vastustajan_kortti_toka}");
-    Console.WriteLine($"{floppi1} {floppi2} {floppi3} {jaa_turni()} {jaa_riveri()}");
-    sekoita();
-    */
-    Console.WriteLine("Pelaajan käsi: ");
-    int pelaaja = onko_varisuora("pelaaja","Jh","Kh","Th","Qh", "Ah", "Ad","2s");
-    Console.WriteLine(pelaaja);
-
-    // int tietokone = onko_tayskasi("tietokone","3c","3d","Qc","Qs","4s","Kc", "Qd");
-    // List<int> testi = new List<int>{0};
-    // List<int> testi2 = new List<int>{1};
-    // Console.WriteLine(vertaile_kickereita(kickeri, tietokoneen_kickeri));
-    
-    //int moi2 = onko_vari("tietokone","5d","3h","Jd","9h","Td","4d", "Qd");
-    //Console.WriteLine(moi2);
-    //int kumpi_voitti = vertaile_kickereita(kickeri,tietokoneen_kickeri);
-    //Console.WriteLine(kumpi_voitti);
     

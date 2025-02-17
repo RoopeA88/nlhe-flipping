@@ -1,6 +1,6 @@
 namespace NLHEFLIPPING;
 
-class Pakka{
+public class Pakka{
     Random random = new Random();
     public Kortit kortit;
     public List<string> kortit_listana;
@@ -24,13 +24,13 @@ class Pakka{
     kortit_listana.RemoveAt(random_luku1);
     return turni;
 }
-    string jaa_riveri(){
+    public string jaa_riveri(){
     int random_luku1 = random.Next(0,44);
     string riveri = kortit_listana[random_luku1];
     kortit_listana.RemoveAt(random_luku1);
     return riveri;
 }
-    string jaa_pelaajan_kortit(){
+    public string jaa_pelaajan_kortit(){
     int random_luku1 = random.Next(0,52);
     string pelaajan_kortti1 = kortit_listana[random_luku1];
     kortit_listana.RemoveAt(random_luku1);
@@ -41,7 +41,7 @@ class Pakka{
     return palautettava;
 }
 
-    string jaa_vastustajan_kortit(){
+    public string jaa_vastustajan_kortit(){
     int random_luku1 = random.Next(0,50);
     string vastustajan_kortti1 = kortit_listana[random_luku1];
     kortit_listana.RemoveAt(random_luku1);
@@ -53,7 +53,7 @@ class Pakka{
 }
     public Pakka(Kortit _kortit){
         kortit = _kortit;
-        List<string> kortit_listana = new List<string>(Kortit.korttipakka);
+        kortit_listana = new List<string>(Kortit.korttipakka);
                       
     
     }

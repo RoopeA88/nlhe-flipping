@@ -1,6 +1,6 @@
 namespace NLHEFLIPPING;
 
-class Kadet{
+public class Kadet{
 
     public int kortti_luvuksi(string kortti){
         char pilkotaan_kortti = kortti[0];
@@ -155,6 +155,18 @@ class Kadet{
         } else{
             return 0;
         }
+    }
+    public int onko_hai(int kortti1, int kortti2, int floppi1, int floppi2, int floppi3, int turni, int riveri){
+        List<int> Lista = new List<int>{kortti1, kortti2, floppi1, floppi2, floppi3, turni, riveri};
+        
+        int suurin = 0;
+        for(int i = 0; i < Lista.Count;i++){
+            if(Lista[i] > suurin){
+                suurin = Lista[i];
+            }
+        }
+        return suurin;
+
     }
     public int onko_suora(string varisuora_vai_suora,int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int floppi2, int floppi3, int turn, int river){
         int suoran_laskuri = 0;
@@ -326,7 +338,7 @@ class Kadet{
         }
     }
 
-    int onko_tayskasi(string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+    public int onko_tayskasi(string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
         List<string> lista = new List<string>{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};
         List<string> tayskasi = new List<string>();
         List<string> kolmoset = new List<string>();
@@ -394,7 +406,7 @@ class Kadet{
           
            return 0;         
         }
-        int onko_neloset(string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        public int onko_neloset(string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
             List<string> lista = new List<string>{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};
             List<string> neloset = new List<string>();
             int indeksi = 0;
@@ -434,7 +446,7 @@ class Kadet{
                 }
                     
         }
-        int onko_varisuora(string kortti1,string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        public int onko_varisuora(string kortti1,string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
             string[] lista = new string[]{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};
             List<int> hertta = new List<int>();
             List<int> pata = new List<int>();
