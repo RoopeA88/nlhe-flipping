@@ -1,6 +1,9 @@
+using System.ComponentModel;
+
 namespace NLHEFLIPPING;
 
-public class Kadet{
+public class Kadet:Program{
+
 
     public int kortti_luvuksi(string kortti){
         char pilkotaan_kortti = kortti[0];
@@ -22,8 +25,11 @@ public class Kadet{
         return kortti_numerona;
     }
 
-    public int onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
-        List<int> kickeri = new List<int>{};
+    public int onko_vari(List<List<int>> palautettava_lista,string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        palautettava_lista.Clear();
+        List<int> palautettava_numero = new List<int>();
+        List<int> kickeri = new List<int>();
+        
         int diamond = 0;
         int club = 0;
         int spade = 0;
@@ -65,11 +71,12 @@ public class Kadet{
             foreach(string kortti in lista){
                 
                 if(kortti[1] == 'd'){
-                Console.WriteLine($"listaan pistettavat kortit: {kortti} ");
+                //Console.WriteLine($"listaan pistettavat kortit: {kortti} ");
                     kickeri.Add(kortti_luvuksi(kortti));
                     
                 } 
             }
+            palautettava_lista.Add(kickeri);
             if(isoin_d == 14){
                 Console.WriteLine("väri: ässä hai");
             } else if(isoin_d == 13){
@@ -81,10 +88,10 @@ public class Kadet{
             } else{
                 Console.WriteLine($"väri {isoin_d} hai");
             }
-            if(kickeri.Any()){
+            //if(kickeri.Any()){
                 //Console.WriteLine($"tämä on olevinaan max: {kickeri.Max()}");
-                kickeri.Remove(kickeri.Max());
-            } 
+                //kickeri.Remove(kickeri.Max());
+            //} 
             
             
             return isoin_d;
@@ -93,8 +100,10 @@ public class Kadet{
                 if(kortti[1] == 'h'){
                     
                     kickeri.Add(kortti_luvuksi(kortti));
-                } 
+                }
+                
             }
+            palautettava_lista.Add(kickeri);
             if(isoin_h == 14){
                 Console.WriteLine("väri: ässä hai");
             } else if(isoin_h == 13){
@@ -106,16 +115,18 @@ public class Kadet{
             } else{
                 Console.WriteLine($"väri {isoin_h} hai");
             }
-            if(kickeri.Any()){
-                kickeri.Remove(kickeri.Max());
-            } 
+            // if(kickeri.Any()){
+            //     kickeri.Remove(kickeri.Max());
+            // } 
             return isoin_h;
         } else if(spade > 4){
             foreach(string kortti in lista){
                 if(kortti[1] == 's'){
                     kickeri.Add(kortti_luvuksi(kortti));
-                } 
+                }
+                
             }
+            palautettava_lista.Add(kickeri);
             if(isoin_s == 14){
                 Console.WriteLine("väri: ässä hai");
             } else if(isoin_s == 13){
@@ -127,16 +138,18 @@ public class Kadet{
             } else{
                 Console.WriteLine($"väri {isoin_s} hai");
             }
-            if(kickeri.Any()){
-                kickeri.Remove(kickeri.Max());
-            } 
+            //if(kickeri.Any()){
+                //kickeri.Remove(kickeri.Max());
+            //} 
             return isoin_s;
         } else if(club > 4){
             foreach(string kortti in lista){
                 if(kortti[1] == 'c'){
                     kickeri.Add(kortti_luvuksi(kortti));
-                } 
+                }
+                
             }
+            palautettava_lista.Add(kickeri);
             if(isoin_c == 14){
                 Console.WriteLine("väri: ässä hai");
             } else if(isoin_c == 13){
@@ -148,9 +161,9 @@ public class Kadet{
             } else{
                 Console.WriteLine($"väri {isoin_c} hai");
             }
-            if(kickeri.Any()){
-                kickeri.Remove(kickeri.Max());
-            } 
+            // if(kickeri.Any()){
+            //     kickeri.Remove(kickeri.Max());
+            // } 
             return isoin_c;
         } else{
             return 0;
@@ -165,7 +178,23 @@ public class Kadet{
                 suurin = Lista[i];
             }
         }
-        return suurin;
+        if(suurin == 14){
+            Console.WriteLine("Pelaajalla on ässä hai.");
+            return 14;
+        } else if(suurin == 13){
+            Console.WriteLine("Pelaajalla on kuningas hai.");
+            return 13;
+        } else if(suurin == 12){
+            Console.WriteLine("Pelaajalla on rouva hai.");
+            return 12;
+        } else if(suurin == 11){
+            Console.WriteLine("Pelaajalla on jätkä hai.");
+            return 10;
+        } else{
+            Console.WriteLine($"Pelaajalla on {suurin} hai");
+            return suurin;
+        }
+        
 
     }
     public int onko_suora(string varisuora_vai_suora,int pelaajan_kortti1, int pelaajan_kortti2, int floppi1, int floppi2, int floppi3, int turn, int river){
@@ -413,7 +442,7 @@ public class Kadet{
             while(indeksi < lista.Count()){
                 for(int i = 0; i< lista.Count; i++){
                     if(kortti_luvuksi(lista[indeksi]) == kortti_luvuksi(lista[i]) && lista[indeksi] != lista[i] && !neloset.Contains(lista[indeksi])){
-                        Console.WriteLine(lista[indeksi]);
+                        //Console.WriteLine(lista[indeksi]);
                         neloset.Add(lista[indeksi]);
                     }
                 }
