@@ -4,7 +4,7 @@ namespace NLHEFLIPPING;
 
 public class Kadet:Program{
 
-
+    
     public int kortti_luvuksi(string kortti){
         char pilkotaan_kortti = kortti[0];
         int kortti_numerona;
@@ -367,12 +367,13 @@ public class Kadet:Program{
         }
     }
 
-    public int onko_tayskasi(string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+    public int onko_tayskasi(List<List<int>> tayskasi_listaan,string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
         List<string> lista = new List<string>{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};
         List<string> tayskasi = new List<string>();
         List<string> kolmoset = new List<string>();
         List<string> pari = new List<string>();
-        List<int> kickeri = new List<int>{};
+        //List<int> kickeri = new List<int>{};
+        List<int> tayskasi_numerona = new();
         
         int indeksi = 0;
         
@@ -390,6 +391,7 @@ public class Kadet:Program{
         
         
         
+        
         if(tayskasi.Count == 5){
             
             tayskasi.Sort();
@@ -397,34 +399,61 @@ public class Kadet:Program{
                 pari.Add(tayskasi[0]);
                 kolmoset.Add(tayskasi[2]);
                 Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
-                kickeri.Add(kortti_luvuksi(pari[0]));
-                kickeri.Add(kortti_luvuksi(pari[0]));
+                //kickeri.Add(kortti_luvuksi(pari[0]));
+                //kickeri.Add(kortti_luvuksi(pari[0]));
+                for(int i = 0; i<kolmoset.Count; i++){ //tämä for-looppi uusin liittyen tuplalistaan. nyt lisätään kolmoiset ekaan listaan, sen jälkeen toisessa for-loopissa pari niin on järjestyksessä ja voidaan käyttää vertaile kickeria metodia myöhemmin
+                    tayskasi_numerona.Add(kortti_luvuksi(kolmoset[i]));
+                }
+                for(int i = 0; i< pari.Count; i++){
+                    tayskasi_numerona.Add(kortti_luvuksi(pari[i])); // tämä for-looppi lisää parit kolmosien perään samaan listaan
+                }
+                tayskasi_listaan.Add(tayskasi_numerona);
                 return kortti_luvuksi(kolmoset[0]);
             } else if(tayskasi[0][0] == tayskasi[2][0]){
                 kolmoset.Add(tayskasi[0]);
                 pari.Add(tayskasi[3]);
-                kickeri.Add(kortti_luvuksi(pari[0]));
-                kickeri.Add(kortti_luvuksi(pari[0]));
+                //kickeri.Add(kortti_luvuksi(pari[0]));
+                //kickeri.Add(kortti_luvuksi(pari[0]));
                 Console.WriteLine($"Pelaajalla on täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
-            
+                for(int i = 0; i<kolmoset.Count; i++){ //sama homma kuin ylhäällä, kolmoset ensiksi listaan
+                    tayskasi_numerona.Add(kortti_luvuksi(kolmoset[i]));
+                }
+                for(int i = 0; i<pari.Count; i++){ // oari perään listaan
+                    tayskasi_numerona.Add(kortti_luvuksi(pari[i]));
+                }
+                tayskasi_listaan.Add(tayskasi_numerona);
                 return kortti_luvuksi(kolmoset[0]);
             }
         } else if(tayskasi.Count == 6 ){
             tayskasi.Sort();
-            kickeri.Clear();
+            //kickeri.Clear();
             if(kortti_luvuksi(tayskasi[0]) > kortti_luvuksi(tayskasi[3])){
                 kolmoset.Add(tayskasi[0]);
                 pari.Add(tayskasi[3]);
-                kickeri.Add(kortti_luvuksi(pari[0]));
-                kickeri.Add(kortti_luvuksi(pari[0]));
+                //kickeri.Add(kortti_luvuksi(pari[0]));
+                //kickeri.Add(kortti_luvuksi(pari[0]));
                 Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                for(int i = 0; i<kolmoset.Count;i++){
+                    tayskasi_numerona.Add(kortti_luvuksi(kolmoset[i]));
+                }
+                for(int i = 0; i<pari.Count;i++){
+                    tayskasi_numerona.Add(kortti_luvuksi(pari[i]));
+                }
+                tayskasi_listaan.Add(tayskasi_numerona);
                 return kortti_luvuksi(kolmoset[0]);
             } else{
                 kolmoset.Add(tayskasi[3]);
                 pari.Add(tayskasi[0]);
-                kickeri.Add(kortti_luvuksi(pari[0]));
-                kickeri.Add(kortti_luvuksi(pari[0]));
+                //kickeri.Add(kortti_luvuksi(pari[0]));
+                //kickeri.Add(kortti_luvuksi(pari[0]));
                 Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                for(int i = 0; i<kolmoset.Count;i++){
+                    tayskasi_numerona.Add(kortti_luvuksi(kolmoset[i]));
+                }
+                for(int i = 0; i< pari.Count; i++){
+                    tayskasi_numerona.Add(kortti_luvuksi(pari[i]));
+                }
+                tayskasi_listaan.Add(tayskasi_numerona);
                 return kortti_luvuksi(kolmoset[0]);
             }
         }

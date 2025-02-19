@@ -12,8 +12,11 @@ public class Pelaaja:Kadet{
             return 9;
         } else if(onko_neloset(JaetutKortit.pelaajan_kortti1, JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1, JaetutKortit.floppi2, JaetutKortit.floppi3, JaetutKortit.turni, JaetutKortit.riveri) >0){
             return 8;
-        } else if(onko_tayskasi(JaetutKortit.pelaajan_kortti1,JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1,JaetutKortit.floppi2,JaetutKortit.floppi3,JaetutKortit.turni,JaetutKortit.riveri) >0){
-            return 7;
+        } else if(onko_tayskasi(lista,JaetutKortit.pelaajan_kortti1,JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1,JaetutKortit.floppi2,JaetutKortit.floppi3,JaetutKortit.turni,JaetutKortit.riveri) >0){
+            List<int> palautettava_kasikoodi = new();
+            palautettava_kasikoodi.Add(7);
+            lista.Add(palautettava_kasikoodi);
+            return lista[1][0];
         } else if(onko_vari(lista,JaetutKortit.pelaajan_kortti1,JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1,JaetutKortit.floppi2,JaetutKortit.floppi3,JaetutKortit.turni,JaetutKortit.riveri)>0){
             List<int> palautettava_kasikoodi = new();
             palautettava_kasikoodi.Add(6);

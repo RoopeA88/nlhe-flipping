@@ -16,6 +16,7 @@ class Kicker{
                 return 2;
             }
         }
+        Console.WriteLine("Tasapeli!");
         return 0;
 
     }

@@ -30,15 +30,18 @@ public class JaetutKortit{
         riveri = pakka.jaa_riveri();
 
     }
-    public void varitesti(){
+    public void kasitesti(){
+        tietokoneen_kortti1 = "9s";
+        tietokoneen_kortti2 = "9d";
         pelaajan_kortti1 = "4c";
-        pelaajan_kortti2 = "8c";
-        floppi1 = "Qh";
-        floppi2 = "Kc";
+        pelaajan_kortti2 = "4h";
+        floppi1 = "4d";
+        floppi2 = "9h";
         floppi3 = "Kh";
         turni = "Qc";
-        riveri = "Tc";
+        riveri = "Ks";
     }
+    
     public void kerro_poyta(){
         Console.WriteLine($"Pöytä on {floppi1} {floppi2} {floppi3} {turni} {riveri}");
     }
