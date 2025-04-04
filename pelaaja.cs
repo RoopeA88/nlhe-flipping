@@ -9,11 +9,26 @@ public class Pelaaja:Kadet{
 
     public int mika_kasi(List<List<int>> lista){
         if(onko_varisuora(JaetutKortit.pelaajan_kortti1, JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1, JaetutKortit.floppi2, JaetutKortit.floppi3, JaetutKortit.turni, JaetutKortit.riveri) >0){
-            return 9;
-        } else if(onko_neloset(JaetutKortit.pelaajan_kortti1, JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1, JaetutKortit.floppi2, JaetutKortit.floppi3, JaetutKortit.turni, JaetutKortit.riveri) >0){
-            return 8;
-        } else if(onko_tayskasi(lista,JaetutKortit.pelaajan_kortti1,JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1,JaetutKortit.floppi2,JaetutKortit.floppi3,JaetutKortit.turni,JaetutKortit.riveri) >0){
             List<int> palautettava_kasikoodi = new();
+            List<int> verrattava_kickeri = new();
+            int kickeri_listaan = onko_varisuora(JaetutKortit.pelaajan_kortti1, JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1, JaetutKortit.floppi2, JaetutKortit.floppi3, JaetutKortit.turni, JaetutKortit.riveri);
+            palautettava_kasikoodi.Add(kickeri_listaan);
+            verrattava_kickeri.Add(9);
+            lista.Add(palautettava_kasikoodi);
+            lista.Add(verrattava_kickeri);
+            return palautettava_kasikoodi[0];
+        } else if(onko_neloset(JaetutKortit.pelaajan_kortti1, JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1, JaetutKortit.floppi2, JaetutKortit.floppi3, JaetutKortit.turni, JaetutKortit.riveri) >0){
+            List<int> palautettava_kasikoodi = new();
+            List<int> verrattava_kickeri = new();
+            int kickeri_listaan = onko_neloset(JaetutKortit.pelaajan_kortti1, JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1, JaetutKortit.floppi2, JaetutKortit.floppi3, JaetutKortit.turni, JaetutKortit.riveri);
+            palautettava_kasikoodi.Add(kickeri_listaan);
+            verrattava_kickeri.Add(8);
+            lista.Add(palautettava_kasikoodi);
+            lista.Add(verrattava_kickeri);
+            return palautettava_kasikoodi[0];
+        } else if(onko_tayskasi(lista,JaetutKortit.pelaajan_kortti1,JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1,JaetutKortit.floppi2,JaetutKortit.floppi3,JaetutKortit.turni,JaetutKortit.riveri)[0] >0){
+            List<int> palautettava_kasikoodi = new();
+            List<int> verrattava_kickeri = onko_tayskasi(lista,JaetutKortit.pelaajan_kortti1,JaetutKortit.pelaajan_kortti2,JaetutKortit.floppi1,JaetutKortit.floppi2,JaetutKortit.floppi3,JaetutKortit.turni,JaetutKortit.riveri);
             palautettava_kasikoodi.Add(7);
             lista.Add(palautettava_kasikoodi);
             return lista[1][0];

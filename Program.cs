@@ -26,7 +26,8 @@ public class Program{
     Kortit cards = new Kortit();
     Pakka pakka = new Pakka(cards);
     JaetutKortit jaetut_kortit = new JaetutKortit(pakka);
-    jaetut_kortit.kasitesti();
+    //jaetut_kortit.kasitesti();
+    jaetut_kortit.jaa_kortit();
     Kicker vertaile = new();
     
     // ohjelma.pelaajan_kickeri.Add(pelaaja.kortti_luvuksi(JaetutKortit.pelaajan_kortti1));

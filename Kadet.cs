@@ -367,14 +367,15 @@ public class Kadet:Program{
         }
     }
 
-    public int onko_tayskasi(List<List<int>> tayskasi_listaan,string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+    public List<int> onko_tayskasi(List<List<int>> tayskasi_listaan,string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
         List<string> lista = new List<string>{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};
         List<string> tayskasi = new List<string>();
         List<string> kolmoset = new List<string>();
         List<string> pari = new List<string>();
+        List<int> tyhja = new();
         //List<int> kickeri = new List<int>{};
         List<int> tayskasi_numerona = new();
-        
+        tyhja.Append(0);
         int indeksi = 0;
         
         while(indeksi < lista.Count){
@@ -408,7 +409,7 @@ public class Kadet:Program{
                     tayskasi_numerona.Add(kortti_luvuksi(pari[i])); // tämä for-looppi lisää parit kolmosien perään samaan listaan
                 }
                 tayskasi_listaan.Add(tayskasi_numerona);
-                return kortti_luvuksi(kolmoset[0]);
+                return tayskasi_listaan[0];
             } else if(tayskasi[0][0] == tayskasi[2][0]){
                 kolmoset.Add(tayskasi[0]);
                 pari.Add(tayskasi[3]);
@@ -422,7 +423,7 @@ public class Kadet:Program{
                     tayskasi_numerona.Add(kortti_luvuksi(pari[i]));
                 }
                 tayskasi_listaan.Add(tayskasi_numerona);
-                return kortti_luvuksi(kolmoset[0]);
+                return tayskasi_listaan[0];
             }
         } else if(tayskasi.Count == 6 ){
             tayskasi.Sort();
@@ -440,7 +441,7 @@ public class Kadet:Program{
                     tayskasi_numerona.Add(kortti_luvuksi(pari[i]));
                 }
                 tayskasi_listaan.Add(tayskasi_numerona);
-                return kortti_luvuksi(kolmoset[0]);
+                return tayskasi_listaan[0];
             } else{
                 kolmoset.Add(tayskasi[3]);
                 pari.Add(tayskasi[0]);
@@ -454,7 +455,7 @@ public class Kadet:Program{
                     tayskasi_numerona.Add(kortti_luvuksi(pari[i]));
                 }
                 tayskasi_listaan.Add(tayskasi_numerona);
-                return kortti_luvuksi(kolmoset[0]);
+                return tayskasi_listaan[0];
             }
         }
 
@@ -462,7 +463,7 @@ public class Kadet:Program{
         
          
           
-           return 0;         
+           return tyhja;         
         }
         public int onko_neloset(string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
             List<string> lista = new List<string>{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};
