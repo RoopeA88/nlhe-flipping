@@ -1,2 +1,10 @@
+# .NET buildit
 bin/
 obj/
+
+# Käyttöjärjestelmän roskat
+*.DS_Store
+Thumbs.db
+
+# VSCode-asetukset (valinnainen)
+.vscode/
