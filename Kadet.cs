@@ -25,10 +25,13 @@ public class Kadet:Program{
         return kortti_numerona;
     }
 
-    public int onko_vari(List<List<int>> palautettava_lista,string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+    public List<List<int>> onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        List<List<int>> palautettava_lista = new();
         palautettava_lista.Clear();
         List<int> palautettava_numero = new List<int>();
         List<int> kickeri = new List<int>();
+        List<List<int>> tyhja = new();
+        List<int> tyhja_sisempi = new();
         
         int diamond = 0;
         int club = 0;
@@ -76,7 +79,8 @@ public class Kadet:Program{
                     
                 } 
             }
-            palautettava_lista.Add(kickeri);
+            kickeri.Sort();
+            //palautettava_lista.Add(kickeri);
             if(isoin_d == 14){
                 Console.WriteLine("väri: ässä hai");
             } else if(isoin_d == 13){
@@ -88,13 +92,15 @@ public class Kadet:Program{
             } else{
                 Console.WriteLine($"väri {isoin_d} hai");
             }
-            //if(kickeri.Any()){
+            if(kickeri.Any()){
                 //Console.WriteLine($"tämä on olevinaan max: {kickeri.Max()}");
-                //kickeri.Remove(kickeri.Max());
-            //} 
+                palautettava_numero.Add(kickeri.Max());
+                kickeri.Remove(kickeri.Max());
+            } 
+            palautettava_lista.Add(palautettava_numero);
+            palautettava_lista.Add(kickeri);
             
-            
-            return isoin_d;
+            return palautettava_lista;
         } else if(heart > 4){
             foreach(string kortti in lista){
                 if(kortti[1] == 'h'){
@@ -103,7 +109,8 @@ public class Kadet:Program{
                 }
                 
             }
-            palautettava_lista.Add(kickeri);
+            kickeri.Sort();
+            //palautettava_lista.Add(kickeri);
             if(isoin_h == 14){
                 Console.WriteLine("väri: ässä hai");
             } else if(isoin_h == 13){
@@ -115,10 +122,13 @@ public class Kadet:Program{
             } else{
                 Console.WriteLine($"väri {isoin_h} hai");
             }
-            // if(kickeri.Any()){
-            //     kickeri.Remove(kickeri.Max());
-            // } 
-            return isoin_h;
+             if(kickeri.Any()){
+                palautettava_numero.Add(kickeri.Max());
+                 kickeri.Remove(kickeri.Max());
+             } 
+             palautettava_lista.Add(palautettava_numero);
+             palautettava_lista.Add(kickeri);
+            return palautettava_lista;
         } else if(spade > 4){
             foreach(string kortti in lista){
                 if(kortti[1] == 's'){
@@ -126,7 +136,8 @@ public class Kadet:Program{
                 }
                 
             }
-            palautettava_lista.Add(kickeri);
+            kickeri.Sort();
+            //palautettava_lista.Add(kickeri);
             if(isoin_s == 14){
                 Console.WriteLine("väri: ässä hai");
             } else if(isoin_s == 13){
@@ -138,10 +149,13 @@ public class Kadet:Program{
             } else{
                 Console.WriteLine($"väri {isoin_s} hai");
             }
-            //if(kickeri.Any()){
-                //kickeri.Remove(kickeri.Max());
-            //} 
-            return isoin_s;
+            if(kickeri.Any()){
+                palautettava_numero.Add(kickeri.Max());
+                kickeri.Remove(kickeri.Max());
+            } 
+            palautettava_lista.Add(palautettava_numero);
+            palautettava_lista.Add(kickeri);
+            return palautettava_lista;
         } else if(club > 4){
             foreach(string kortti in lista){
                 if(kortti[1] == 'c'){
@@ -149,7 +163,8 @@ public class Kadet:Program{
                 }
                 
             }
-            palautettava_lista.Add(kickeri);
+            kickeri.Sort();
+            //palautettava_lista.Add(kickeri);
             if(isoin_c == 14){
                 Console.WriteLine("väri: ässä hai");
             } else if(isoin_c == 13){
@@ -161,12 +176,17 @@ public class Kadet:Program{
             } else{
                 Console.WriteLine($"väri {isoin_c} hai");
             }
-            // if(kickeri.Any()){
-            //     kickeri.Remove(kickeri.Max());
-            // } 
-            return isoin_c;
+             if(kickeri.Any()){
+                palautettava_numero.Add(kickeri.Max());
+                 kickeri.Remove(kickeri.Max());
+             } 
+             palautettava_lista.Add(palautettava_numero);
+             palautettava_lista.Add(kickeri);
+            return palautettava_lista;
         } else{
-            return 0;
+            tyhja_sisempi.Add(0);
+            tyhja.Add(tyhja_sisempi);
+            return tyhja;
         }
     }
     public int onko_hai(int kortti1, int kortti2, int floppi1, int floppi2, int floppi3, int turni, int riveri){
@@ -254,7 +274,7 @@ public class Kadet:Program{
         }
             return 0;
         }
-    public int onko_pari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+    public List<int> onko_pari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
             List<int> kickeri = new List<int>{};
             List<string> korttiArray = new List<string> {pelaajan_kortti1, pelaajan_kortti2, floppi1, floppi2, floppi3, turn, river};
             int indeksi = 0;
@@ -288,19 +308,26 @@ public class Kadet:Program{
             }
             kickeri.Sort();
             if(onko_pari == 2){
+                kickeri.RemoveAt(0);
+                kickeri.RemoveAt(0);
+                int EkaPari = kortti_luvuksi(parit_listassa[1]);
+                int TokaPari = kortti_luvuksi(parit_listassa[0]);
+                kickeri.Insert(kickeri.Count-1,EkaPari);
+                kickeri.Insert(kickeri.Count-1,TokaPari);
                 Console.WriteLine($"Pelaajalla on yksi pari {parit_listassa[0]} {parit_listassa[1]}, kickerillä {isoin_kortti}");
-                return kortin_arvo;
+                return kickeri;
             } else{
-            return 0;
+            return null;
             }
             
         }
         
-        public List<string> onko_kaksi_paria(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        public List<int> onko_kaksi_paria(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
         List<int> kickeri = new List<int>{};
         List<string> korttiArray = new List<string> {pelaajan_kortti1, pelaajan_kortti2, floppi1, floppi2, floppi3, turn, river};
         List<int> parit = new List<int>{};
         List<string> parit_kortteina = new List<string>{};
+        List<List<int>> PalautettavaLista = new();
         int indeksi = 0;
         int onko_pari = 0;
         int kortin_arvo = 0;
@@ -329,21 +356,25 @@ public class Kadet:Program{
                 }
             }
         }
+        int IsoinKickeri = kickeri.Max();
         if(onko_pari == 4){
             
             parit.Sort();
             parit_kortteina.Sort();
+            parit.Insert(0,IsoinKickeri);
             Console.WriteLine($"Pelaajalla on kaksi paria, {parit_kortteina[0]} {parit_kortteina[1]} ja {parit_kortteina[2]} {parit_kortteina[3]} kickerillä {isoin_kortti}");
-            return parit_kortteina;
+            return parit;
         } else{
         return null;
         }
         
     }
-    public int onko_kolmoset(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+    public List<int> onko_kolmoset(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
         List<string> kortit = new List<string>{pelaajan_kortti1, pelaajan_kortti2, floppi1, floppi2, floppi3, turn, river};
         List<int> kickeri = new List<int>{};
         List<string> parilliset_kortit = new List<string>();
+        List<List<int>> palautettava_lista = new();
+        List<int> parilliset_kortit_numerona = new();
         int onko_sama = 0;
         for(int i = 0; i<7;i++){
             foreach(string kortti in kortit){
@@ -361,13 +392,32 @@ public class Kadet:Program{
         }
         if(onko_sama == 6){
             Console.WriteLine($"Pelaajalla on kolmoset: {parilliset_kortit[0]} {parilliset_kortit[1]} {parilliset_kortit[2]} ");
-            return kortti_luvuksi(parilliset_kortit[0]);
+            foreach (var item in parilliset_kortit){
+                int item2 = kortti_luvuksi((item));
+                parilliset_kortit_numerona.Add(item2);
+            }
+            parilliset_kortit_numerona.Sort();
+            for(int i = 0; i<2; i++){
+                int isoin = kickeri.Max();
+                parilliset_kortit_numerona.Insert(0,isoin);
+                kickeri.Remove(isoin);
+
+            }
+            
+
+            {
+                
+            }
+            palautettava_lista.Add(parilliset_kortit_numerona);
+            palautettava_lista.Add(kickeri);
+            return parilliset_kortit_numerona;
         } else{
-            return 0;
+            return null;
         }
     }
 
-    public List<int> onko_tayskasi(List<List<int>> tayskasi_listaan,string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+    public List<int> onko_tayskasi(string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
+        List<List<int>> tayskasi_listaan = new();
         List<string> lista = new List<string>{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};
         List<string> tayskasi = new List<string>();
         List<string> kolmoset = new List<string>();

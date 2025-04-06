@@ -15,8 +15,7 @@ using NLHEFLIPPING;
 
 
 public class Program{
-    public List<int> pelaajan_kickeri = new List<int>();
-    public List<int> tietokoneen_kickeri = new List<int>();
+    
     List<List<int>> lista = new();
     List<List<int>> lista2 = new();
     static void Main(){
@@ -45,12 +44,12 @@ public class Program{
     // for(int i = 0; i<ohjelma.lista[0].Count; i++){
     //     Console.WriteLine(ohjelma.lista[0][i]);
     // }
-    if(pelaaja.mika_kasi(ohjelma.lista) > pelaaja2.mika_kasi(ohjelma.lista2)){
+    if(pelaaja.mika_kasi(ohjelma.lista)[0][0] > pelaaja2.mika_kasi(ohjelma.lista2)[0][0]){
         Console.WriteLine("Pelaaja voittaa!");
-    } else if (pelaaja2.mika_kasi(ohjelma.lista2) > pelaaja.mika_kasi(ohjelma.lista)){
+    } else if (pelaaja2.mika_kasi(ohjelma.lista2)[0][0] > pelaaja.mika_kasi(ohjelma.lista)[0][0]){
         Console.WriteLine("Tietokone voittaa!");
     } else{
-        vertaile.vertaile_kickereita(ohjelma.lista[0], ohjelma.lista2[0]);
+        vertaile.vertaile_kickereita(ohjelma.lista[1], ohjelma.lista2[1]);
 
         }
     }
