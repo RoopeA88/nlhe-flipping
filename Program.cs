@@ -21,7 +21,7 @@ public class Program{
     static void Main(){
     Program ohjelma = new();
     Pelaaja pelaaja = new Pelaaja();
-    Pelaaja pelaaja2 = new Pelaaja();
+    Tietokone tietokone = new();
     Kortit cards = new Kortit();
     Pakka pakka = new Pakka(cards);
     JaetutKortit jaetut_kortit = new JaetutKortit(pakka);
@@ -38,15 +38,17 @@ public class Program{
     // ohjelma.pelaajan_kickeri.Add(pelaaja.kortti_luvuksi(JaetutKortit.riveri));
     // ohjelma.lista.Add(ohjelma.pelaajan_kickeri);
     pelaaja.kerro_kortit();
-    pelaaja2.kerro_kortit();
+    tietokone.kerro_kortit();
     jaetut_kortit.kerro_poyta();
     // Console.WriteLine(pelaaja.mika_kasi(ohjelma.lista));
     // for(int i = 0; i<ohjelma.lista[0].Count; i++){
     //     Console.WriteLine(ohjelma.lista[0][i]);
     // }
-    if(pelaaja.mika_kasi(ohjelma.lista)[0][0] > pelaaja2.mika_kasi(ohjelma.lista2)[0][0]){
+    ohjelma.lista = pelaaja.mika_kasi(ohjelma.lista);
+    ohjelma.lista2 = tietokone.mika_kasi(ohjelma.lista2);
+    if(ohjelma.lista[0][0] > ohjelma.lista2[0][0]){
         Console.WriteLine("Pelaaja voittaa!");
-    } else if (pelaaja2.mika_kasi(ohjelma.lista2)[0][0] > pelaaja.mika_kasi(ohjelma.lista)[0][0]){
+    } else if (ohjelma.lista[0][0] < ohjelma.lista2[0][0]){
         Console.WriteLine("Tietokone voittaa!");
     } else{
         vertaile.vertaile_kickereita(ohjelma.lista[1], ohjelma.lista2[1]);

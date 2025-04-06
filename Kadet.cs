@@ -189,31 +189,29 @@ public class Kadet:Program{
             return tyhja;
         }
     }
-    public int onko_hai(int kortti1, int kortti2, int floppi1, int floppi2, int floppi3, int turni, int riveri){
+    public List<int> onko_hai(int kortti1, int kortti2, int floppi1, int floppi2, int floppi3, int turni, int riveri){
         List<int> Lista = new List<int>{kortti1, kortti2, floppi1, floppi2, floppi3, turni, riveri};
         
-        int suurin = 0;
-        for(int i = 0; i < Lista.Count;i++){
-            if(Lista[i] > suurin){
-                suurin = Lista[i];
-            }
-        }
-        if(suurin == 14){
+        Lista.Sort();
+        int isoin = Lista.Max();
+
+        if(isoin == 14){
             Console.WriteLine("Pelaajalla on ässä hai.");
-            return 14;
-        } else if(suurin == 13){
+            return Lista;
+        } else if(isoin == 13){
             Console.WriteLine("Pelaajalla on kuningas hai.");
-            return 13;
-        } else if(suurin == 12){
+            return Lista;
+        } else if(isoin == 12){
             Console.WriteLine("Pelaajalla on rouva hai.");
-            return 12;
-        } else if(suurin == 11){
-            Console.WriteLine("Pelaajalla on jätkä hai.");
-            return 10;
-        } else{
-            Console.WriteLine($"Pelaajalla on {suurin} hai");
-            return suurin;
+            return Lista;
+        } else if(isoin == 11){
+            Console.WriteLine("Pelaajalla on jätkä hai");
+            return Lista;
+        } else if(isoin >0 && isoin <15){
+            Console.WriteLine($"Pelaajalla on {isoin} hai.");
+            return Lista;
         }
+        return null;
         
 
     }
@@ -513,7 +511,7 @@ public class Kadet:Program{
         
          
           
-           return tyhja;         
+           return null;         
         }
         public int onko_neloset(string kortti1, string kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
             List<string> lista = new List<string>{kortti1, kortti2, floppi1, floppi2, floppi3, turn, river};

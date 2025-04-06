@@ -6,8 +6,7 @@ class Kicker{
         lista2.Sort();
         
         for(int i = lista1.Count-1; i>=0;i--){
-            Console.WriteLine(lista1[i]);
-            Console.WriteLine(lista2[i]);
+            
             if(lista1[i] > lista2[i]){
                 Console.WriteLine($"Pelaaja voittaa kickerillä {lista1[i]}");
                 return 1;
