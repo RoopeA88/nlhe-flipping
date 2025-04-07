@@ -24,7 +24,22 @@ public class Kadet:Program{
         }
         return kortti_numerona;
     }
-
+    public string luku_kortiksi(int luku){
+        if(luku == 14){
+            return "A";
+        } else if(luku == 13){
+            return "K";
+        } else if(luku == 12){
+            return "Q";
+        } else if(luku == 11){
+            return "J";
+        } else if(luku == 10){
+            return "T";
+        } else{
+            
+            return luku.ToString();
+        }
+    }
     public List<List<int>> onko_vari(string pelaajan_kortti1, string pelaajan_kortti2, string floppi1, string floppi2, string floppi3, string turn, string river){
         List<List<int>> palautettava_lista = new();
         palautettava_lista.Clear();
@@ -47,7 +62,7 @@ public class Kadet:Program{
             if(kortti[1] == 'd'){
                 
                 diamond++;
-                //Console.WriteLine("testi");
+                ////("testi");
                 if(kortti_luvuksi(kortti) > isoin_d){
                     isoin_d = kortti_luvuksi(kortti);
 
@@ -70,11 +85,11 @@ public class Kadet:Program{
             }
         }
         if(diamond > 4){
-            //Console.WriteLine("testi");
+            ////("testi");
             foreach(string kortti in lista){
                 
                 if(kortti[1] == 'd'){
-                //Console.WriteLine($"listaan pistettavat kortit: {kortti} ");
+                ////($"listaan pistettavat kortit: {kortti} ");
                     kickeri.Add(kortti_luvuksi(kortti));
                     
                 } 
@@ -82,18 +97,18 @@ public class Kadet:Program{
             kickeri.Sort();
             //palautettava_lista.Add(kickeri);
             if(isoin_d == 14){
-                Console.WriteLine("väri: ässä hai");
+                ////("väri: ässä hai");
             } else if(isoin_d == 13){
-                Console.WriteLine("väri: kuningas hai");
+                ////("väri: kuningas hai");
             } else if(isoin_d == 12){
-                Console.WriteLine("väri: rouva hai");
+                ////("väri: rouva hai");
             } else if(isoin_d == 11){
-                Console.WriteLine("väri: jätkä hai");
+                ////("väri: jätkä hai");
             } else{
-                Console.WriteLine($"väri {isoin_d} hai");
+               // //($"väri {isoin_d} hai");
             }
             if(kickeri.Any()){
-                //Console.WriteLine($"tämä on olevinaan max: {kickeri.Max()}");
+                ////($"tämä on olevinaan max: {kickeri.Max()}");
                 palautettava_numero.Add(kickeri.Max());
                 kickeri.Remove(kickeri.Max());
             } 
@@ -112,15 +127,15 @@ public class Kadet:Program{
             kickeri.Sort();
             //palautettava_lista.Add(kickeri);
             if(isoin_h == 14){
-                Console.WriteLine("väri: ässä hai");
+                ////("väri: ässä hai");
             } else if(isoin_h == 13){
-                Console.WriteLine("väri: kuningas hai");
+                ////("väri: kuningas hai");
             } else if(isoin_h == 12){
-                Console.WriteLine("väri: rouva hai");
+                ////("väri: rouva hai");
             } else if(isoin_h == 11){
-                Console.WriteLine("väri: jätkä hai");
+                ////("väri: jätkä hai");
             } else{
-                Console.WriteLine($"väri {isoin_h} hai");
+                ////($"väri {isoin_h} hai");
             }
              if(kickeri.Any()){
                 palautettava_numero.Add(kickeri.Max());
@@ -139,15 +154,15 @@ public class Kadet:Program{
             kickeri.Sort();
             //palautettava_lista.Add(kickeri);
             if(isoin_s == 14){
-                Console.WriteLine("väri: ässä hai");
+                ////("väri: ässä hai");
             } else if(isoin_s == 13){
-                Console.WriteLine("väri: kuningas hai");
+                ////("väri: kuningas hai");
             } else if(isoin_s == 12){
-                Console.WriteLine("väri: rouva hai");
+                ////("väri: rouva hai");
             } else if(isoin_s == 11){
-                Console.WriteLine("väri: jätkä hai");
+                ////("väri: jätkä hai");
             } else{
-                Console.WriteLine($"väri {isoin_s} hai");
+                ////($"väri {isoin_s} hai");
             }
             if(kickeri.Any()){
                 palautettava_numero.Add(kickeri.Max());
@@ -166,15 +181,15 @@ public class Kadet:Program{
             kickeri.Sort();
             //palautettava_lista.Add(kickeri);
             if(isoin_c == 14){
-                Console.WriteLine("väri: ässä hai");
+                ////("väri: ässä hai");
             } else if(isoin_c == 13){
-                Console.WriteLine("väri: kuningas hai");
+                ////("väri: kuningas hai");
             } else if(isoin_c == 12){
-                Console.WriteLine("väri: rouva hai");
+                ////("väri: rouva hai");
             } else if(isoin_c == 11){
-                Console.WriteLine("väri: jätkä hai");
+                ////("väri: jätkä hai");
             } else{
-                Console.WriteLine($"väri {isoin_c} hai");
+                ////($"väri {isoin_c} hai");
             }
              if(kickeri.Any()){
                 palautettava_numero.Add(kickeri.Max());
@@ -196,19 +211,19 @@ public class Kadet:Program{
         int isoin = Lista.Max();
 
         if(isoin == 14){
-            Console.WriteLine("Pelaajalla on ässä hai.");
+            ////("Pelaajalla on ässä hai.");
             return Lista;
         } else if(isoin == 13){
-            Console.WriteLine("Pelaajalla on kuningas hai.");
+            ////("Pelaajalla on kuningas hai.");
             return Lista;
         } else if(isoin == 12){
-            Console.WriteLine("Pelaajalla on rouva hai.");
+            ////("Pelaajalla on rouva hai.");
             return Lista;
         } else if(isoin == 11){
-            Console.WriteLine("Pelaajalla on jätkä hai");
+            ////("Pelaajalla on jätkä hai");
             return Lista;
         } else if(isoin >0 && isoin <15){
-            Console.WriteLine($"Pelaajalla on {isoin} hai.");
+            ////($"Pelaajalla on {isoin} hai.");
             return Lista;
         }
         return null;
@@ -227,45 +242,45 @@ public class Kadet:Program{
             if(kortit_jarjestyksessa[i-1] == kortit_jarjestyksessa[i]-1){
                 suoran_laskuri++;
                 kuinka_suuri_suora.Add(kortit_jarjestyksessa[i]);
-                //Console.WriteLine(suoran_laskuri);
-                //Console.WriteLine(kuinka_suuri_suora.Max());
+                ////(suoran_laskuri);
+                ////(kuinka_suuri_suora.Max());
             } else{
                 suoran_laskuri = 0;
                 kuinka_suuri_suora.Clear();
             }
             if(suoran_laskuri == 4 && varisuora_vai_suora == "suora"){
                 if(kuinka_suuri_suora.Max() == 14){
-                    Console.WriteLine($"Suora: ässä hai");
+                    ////($"Suora: ässä hai");
                 } else if(kuinka_suuri_suora.Max() == 13){
-                    Console.WriteLine($"Suora: kuningas hai");
+                    ////($"Suora: kuningas hai");
                 } else if(kuinka_suuri_suora.Max() == 12){
-                    Console.WriteLine($"Suora: rouva hai");
+                    ////($"Suora: rouva hai");
                 } else if(kuinka_suuri_suora.Max() == 11){
-                    Console.WriteLine($"Suora: jätkä hai");
+                    ////($"Suora: jätkä hai");
                 } else{
-                    Console.WriteLine($"Suora: {kuinka_suuri_suora.Max()} hai");
+                    ////($"Suora: {kuinka_suuri_suora.Max()} hai");
                 }
                 return kuinka_suuri_suora.Max();
             } else if( varisuora_vai_suora == "suora" && kortit_jarjestyksessa.Contains(14) && kortit_jarjestyksessa.Contains(2) && kortit_jarjestyksessa.Contains(3) && kortit_jarjestyksessa.Contains(4) && kortit_jarjestyksessa.Contains(5) && !kortit_jarjestyksessa.Contains(6) && suoran_laskuri == 0){
-                Console.WriteLine($"Suora: 5 hai");
+                //Console.WriteLine($"Suora: 5 hai");
                 return 5;
             } 
                 
             if(suoran_laskuri == 4 && varisuora_vai_suora == "värisuora"){
                 if(kuinka_suuri_suora.Max() == 14){
-                    Console.WriteLine($"Värisuora: ässä hai");
+                    //($"Värisuora: ässä hai");
                 } else if(kuinka_suuri_suora.Max() == 13){
-                    Console.WriteLine($"Värisuora: kuningas hai");
+                    //($"Värisuora: kuningas hai");
                 } else if(kuinka_suuri_suora.Max() == 12){
-                    Console.WriteLine($"Värisuora: rouva hai");
+                    //($"Värisuora: rouva hai");
                 } else if(kuinka_suuri_suora.Max() == 11){
-                    Console.WriteLine($"Värisuora: jätkä hai");
+                    //($"Värisuora: jätkä hai");
                 } else{
-                    Console.WriteLine($"Värisuora: {kuinka_suuri_suora.Max()} hai");
+                    //($"Värisuora: {kuinka_suuri_suora.Max()} hai");
                 }
                 return kuinka_suuri_suora.Max();
             } else if(varisuora_vai_suora == "värisuora" && kortit_jarjestyksessa.Contains(14) && kortit_jarjestyksessa.Contains(2) && kortit_jarjestyksessa.Contains(3) && kortit_jarjestyksessa.Contains(4) && kortit_jarjestyksessa.Contains(5) && !kortit_jarjestyksessa.Contains(6) && suoran_laskuri == 0){
-                Console.WriteLine($"Värisuora: 5 hai");
+                //($"Värisuora: 5 hai");
                 return 5;
             }
                 
@@ -306,13 +321,13 @@ public class Kadet:Program{
             }
             kickeri.Sort();
             if(onko_pari == 2){
-                kickeri.RemoveAt(0);
-                kickeri.RemoveAt(0);
+                //kickeri.RemoveAt(0);
+                //kickeri.RemoveAt(0);
                 int EkaPari = kortti_luvuksi(parit_listassa[1]);
                 int TokaPari = kortti_luvuksi(parit_listassa[0]);
-                kickeri.Insert(kickeri.Count-1,EkaPari);
+                kickeri.Insert(kickeri.Count,EkaPari);
                 kickeri.Insert(kickeri.Count-1,TokaPari);
-                Console.WriteLine($"Pelaajalla on yksi pari {parit_listassa[0]} {parit_listassa[1]}, kickerillä {isoin_kortti}");
+                //($"Pelaajalla on yksi pari {parit_listassa[0]} {parit_listassa[1]}, kickerillä {isoin_kortti}");
                 return kickeri;
             } else{
             return null;
@@ -360,7 +375,7 @@ public class Kadet:Program{
             parit.Sort();
             parit_kortteina.Sort();
             parit.Insert(0,IsoinKickeri);
-            Console.WriteLine($"Pelaajalla on kaksi paria, {parit_kortteina[0]} {parit_kortteina[1]} ja {parit_kortteina[2]} {parit_kortteina[3]} kickerillä {isoin_kortti}");
+            //($"Pelaajalla on kaksi paria, {parit_kortteina[0]} {parit_kortteina[1]} ja {parit_kortteina[2]} {parit_kortteina[3]} kickerillä {isoin_kortti}");
             return parit;
         } else{
         return null;
@@ -389,7 +404,7 @@ public class Kadet:Program{
             }
         }
         if(onko_sama == 6){
-            Console.WriteLine($"Pelaajalla on kolmoset: {parilliset_kortit[0]} {parilliset_kortit[1]} {parilliset_kortit[2]} ");
+            //($"Pelaajalla on kolmoset: {parilliset_kortit[0]} {parilliset_kortit[1]} {parilliset_kortit[2]} ");
             foreach (var item in parilliset_kortit){
                 int item2 = kortti_luvuksi((item));
                 parilliset_kortit_numerona.Add(item2);
@@ -430,8 +445,8 @@ public class Kadet:Program{
             for(int j = 0; j< lista.Count; j++){
                 if(lista[indeksi][0] == lista[j][0] && !tayskasi.Contains(lista[indeksi]) && lista[indeksi] != lista[j]){
                     tayskasi.Add(lista[indeksi]);
-                    //Console.WriteLine(lista[indeksi]);
-                    //Console.WriteLine("testi");
+                    ////(lista[indeksi]);
+                    ////("testi");
                     
                 }
             }
@@ -447,7 +462,7 @@ public class Kadet:Program{
             if(kortti_luvuksi(tayskasi[0]) == kortti_luvuksi(tayskasi[1]) && tayskasi[0][0] != tayskasi[2][0]){
                 pari.Add(tayskasi[0]);
                 kolmoset.Add(tayskasi[2]);
-                Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                //($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
                 //kickeri.Add(kortti_luvuksi(pari[0]));
                 //kickeri.Add(kortti_luvuksi(pari[0]));
                 for(int i = 0; i<kolmoset.Count; i++){ //tämä for-looppi uusin liittyen tuplalistaan. nyt lisätään kolmoiset ekaan listaan, sen jälkeen toisessa for-loopissa pari niin on järjestyksessä ja voidaan käyttää vertaile kickeria metodia myöhemmin
@@ -463,7 +478,7 @@ public class Kadet:Program{
                 pari.Add(tayskasi[3]);
                 //kickeri.Add(kortti_luvuksi(pari[0]));
                 //kickeri.Add(kortti_luvuksi(pari[0]));
-                Console.WriteLine($"Pelaajalla on täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                //($"Pelaajalla on täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
                 for(int i = 0; i<kolmoset.Count; i++){ //sama homma kuin ylhäällä, kolmoset ensiksi listaan
                     tayskasi_numerona.Add(kortti_luvuksi(kolmoset[i]));
                 }
@@ -481,7 +496,7 @@ public class Kadet:Program{
                 pari.Add(tayskasi[3]);
                 //kickeri.Add(kortti_luvuksi(pari[0]));
                 //kickeri.Add(kortti_luvuksi(pari[0]));
-                Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                //($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
                 for(int i = 0; i<kolmoset.Count;i++){
                     tayskasi_numerona.Add(kortti_luvuksi(kolmoset[i]));
                 }
@@ -495,7 +510,7 @@ public class Kadet:Program{
                 pari.Add(tayskasi[0]);
                 //kickeri.Add(kortti_luvuksi(pari[0]));
                 //kickeri.Add(kortti_luvuksi(pari[0]));
-                Console.WriteLine($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
+                //($"Pelaajalla täyskäsi, {kolmoset[0][0]} täynnä {pari[0][0]}");
                 for(int i = 0; i<kolmoset.Count;i++){
                     tayskasi_numerona.Add(kortti_luvuksi(kolmoset[i]));
                 }
@@ -520,7 +535,7 @@ public class Kadet:Program{
             while(indeksi < lista.Count()){
                 for(int i = 0; i< lista.Count; i++){
                     if(kortti_luvuksi(lista[indeksi]) == kortti_luvuksi(lista[i]) && lista[indeksi] != lista[i] && !neloset.Contains(lista[indeksi])){
-                        //Console.WriteLine(lista[indeksi]);
+                        ////(lista[indeksi]);
                         neloset.Add(lista[indeksi]);
                     }
                 }
@@ -531,7 +546,7 @@ public class Kadet:Program{
                 return kortti_luvuksi(neloset[0]);
             }
             else if(neloset.Count == 6){
-                //Console.WriteLine(neloset.Count);
+                ////(neloset.Count);
                 neloset.Sort();
                 if(kortti_luvuksi(neloset[0]) == kortti_luvuksi(neloset[3])){
                     return kortti_luvuksi(neloset[0]);
